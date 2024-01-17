@@ -1,0 +1,79 @@
+.main {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoConnexion {
+    width: 10%;
+    margin-bottom: 50px;
+}
+
+.imgLeft {
+    height: 100svh; /* Permet de prendre toute la propriété  */
+    object-fit:cover;
+    background-color: red;
+
+}
+
+.form {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    font-family: 'Overpass', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    background-color:   white;
+}
+
+.form label {
+    padding: 10px;
+}
+.form input{
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #03989E;
+    
+}
+
+.checkbox {
+    color: #03989E;
+}
+
+.connexion {
+    font-size: 20px;
+    text-align: left;
+    justify-content: left;
+
+}
+
+.button {
+    border-radius: 5px;
+    background-color: #03989E;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
+
+.button:hover {
+    background-color: white;
+    color: #03989E;
+    border: 1px solid #03989E;
+}
+
+.linkConnexion {
+    margin: 20px;
+    text-decoration: dashed;
+    color: black;
+    
+}
+
+.linkConnexion :visited{
+    color: black;
+
+}
