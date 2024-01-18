@@ -73,3 +73,13 @@
 .linkConnexion :visited{
     color: black;
 }
+
+.linkInscription {
+    margin-bottom: 50px;
+    text-decoration: dashed;
+    color:#03989E;
+}
+
+.linkInscription :visited{
+    color: #03989E;
+}

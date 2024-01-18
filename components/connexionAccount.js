@@ -1,4 +1,4 @@
-import styles from "@/styles/components/connexionAccount.module.css";
+import styles from "@/styles/components/ConnexionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -15,6 +15,9 @@ export default function ComponentConnexion() {
         <img className={styles.imgLeft} src="/Components/ActionsAccount.png" />
         <div className={styles.form}>
           <img className={styles.logoConnexion} src="/Logo_RE.png" />
+          <Link className={styles.linkInscription} href="/inscription">
+            Pas encore inscrit ? Inscrivez-vous !
+          </Link>
           <p className={styles.connexion}>Connexion</p>
           <label>
             <input placeholder="Nom d'utilisateur" />
