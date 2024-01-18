@@ -1,8 +1,8 @@
-import styles from "@/styles/components/CreateAccount.module.css";
+import styles from "@/styles/components/connexionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
 
-export default function ComponentCreateAccount() {
+export default function ComponentConnexion() {
   return (
     <>
       {/*  Metadata */}
@@ -12,7 +12,7 @@ export default function ComponentCreateAccount() {
 
       {/*  Body */}
       <main className={styles.main}>
-        <img className={styles.imgLeft} src="/Components/CreateAccount.png" />
+        <img className={styles.imgLeft} src="/Components/ActionsAccount.png" />
         <div className={styles.form}>
           <img className={styles.logoConnexion} src="/Logo_RE.png" />
           <p className={styles.connexion}>Connexion</p>

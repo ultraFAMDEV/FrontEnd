@@ -1,8 +1,8 @@
-import ComponentCreateAccount from "@/components/createAccount";
+import ComponentConnexion from "@/components/connexionAccount";
 export default function Connexion() {
   return (
     <>
-      <ComponentCreateAccount />
+      <ComponentConnexion />
     </>
   );
 }

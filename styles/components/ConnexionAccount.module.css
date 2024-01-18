@@ -36,7 +36,6 @@
     margin: 10px;
     border-radius: 5px;
     border: 1px solid #03989E;
-    
 }
 
 .checkbox {
@@ -47,7 +46,6 @@
     font-size: 20px;
     text-align: left;
     justify-content: left;
-
 }
 
 .button {
@@ -70,10 +68,8 @@
     margin: 20px;
     text-decoration: dashed;
     color: black;
-    
 }
 
 .linkConnexion :visited{
     color: black;
-
 }
