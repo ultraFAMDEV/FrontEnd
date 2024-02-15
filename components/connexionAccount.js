@@ -1,8 +1,38 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "@/styles/components/ConnexionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
 
 export default function ComponentConnexion() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(
+        "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/loginEND",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Connexion réussie !");
+        router.push("/");
+      } else {
+        console.error("Échec de la connexion");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion:", error);
+    }
+  };
+
   return (
     <>
       {/*  Metadata */}
@@ -20,11 +50,7 @@ export default function ComponentConnexion() {
           </Link>
           <p className={styles.connexion}>Connexion</p>
           <label>
-            <input
-              placeholder="Nom d'utilisateur"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+            <input placeholder="Nom d'utilisateur" />
           </label>
           <label>
             <input
@@ -38,9 +64,7 @@ export default function ComponentConnexion() {
             <input type="checkbox" />
             Se souvenir de moi
           </label>
-          <div className={styles.button} onClick={handleLogin}>
-            Se connecter
-          </div>
+          <div className={styles.button}>Se connecter</div>
           <Link className={styles.linkConnexion} href="/">
             Annuler, revenir à l'accueil
           </Link>
