@@ -20,16 +20,27 @@ export default function ComponentConnexion() {
           </Link>
           <p className={styles.connexion}>Connexion</p>
           <label>
-            <input placeholder="Nom d'utilisateur" />
+            <input
+              placeholder="Nom d'utilisateur"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </label>
           <label>
-            <input type="password" placeholder="Mot de passe" />
+            <input
+              type="password"
+              placeholder="Mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
           <label className={styles.checkbox}>
             <input type="checkbox" />
             Se souvenir de moi
           </label>
-          <div className={styles.button}>Se connecter</div>
+          <div className={styles.button} onClick={handleLogin}>
+            Se connecter
+          </div>
           <Link className={styles.linkConnexion} href="/">
             Annuler, revenir à l'accueil
           </Link>

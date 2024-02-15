@@ -11,9 +11,7 @@ export default function ComponentInscriptionSuite() {
       </Head>
       {/* BODY */}
       <main className={styles.main}>
-        <img className={styles.imgLeft} src="/Components/ActionsAccount.png" />
         <div className={styles.form}>
-          <img className={styles.logoInscription} src="/Logo_RE.png" />
           <p className={styles.inscription}>Compléter mon profil</p>
           <label>
             <input type="email" placeholder="Adresse mail" />
@@ -28,10 +26,6 @@ export default function ComponentInscriptionSuite() {
               <option value="non-genre">Non genré</option>
             </select>
           </label>
-          <div className={styles.button}>Créer mon profil</div>
-          <Link className={styles.linkCancel} href="/">
-            Annuler, revenir à l'accueil
-          </Link>
         </div>
       </main>
     </>
