@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "@/styles/components/ConnexionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import Link from "next/link";
 export default function ComponentConnexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -22,6 +24,7 @@ export default function ComponentConnexion() {
 
       if (response.ok) {
         console.log("Connexion réussie !");
+        router.push("/");
       } else {
         console.error("Échec de la connexion");
       }
@@ -68,6 +71,9 @@ export default function ComponentConnexion() {
           <div className={styles.button} onClick={handleLogin}>
             Se connecter
           </div>
+          <Link className={styles.linkConnexion} href="/">
+            Continuer en tant qu'invité
+          </Link>
           <Link className={styles.linkConnexion} href="/">
             Annuler, revenir à l'accueil
           </Link>
