@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "@/styles/components/Utilisateur.module.css";
-import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 export async function  getServerSideProps({ query }) {
   const endpoint = 'https://famdev.srvkoikarpfess.ddns.net/api/endpoints/getuser?id=' + query.id;
@@ -24,19 +24,37 @@ export default function Page({ user })
     <div>
       <div className={styles.container}>
         <div className={styles.middle}>
-
-          <div className={styles.banner}>
-            {user.utilisateur_nom} {user.utilisateur_prenom}
-          </div>
-
           <div className={styles.headerImages}>
-            {/*<img src="https://res.cloudinary.com/dowrygm9b/image/upload/v1570267399/laptop-3174729_yiprzu.jpg" alt="banniere" id="profileHeader"/>*/}
-            {/*<img src="https://res.cloudinary.com/dowrygm9b/image/upload/v1570267399/laptop-3174729_yiprzu.jpg" alt="photo de profil" id="profilePicture"/>*/}
+            <Image
+              src="/Logo_RE.png"
+              alt="banniere"
+              width={750}
+              height={200}
+              className={styles.headerImages}
+            />
+            <Image
+              src="/Logo_RE.png"
+              alt="banniere"
+              width={150}
+              height={150}
+              style={{
+                position: 'absolute',
+                top: '130px',
+                left: '20px',
+                border : '4px solid rgb(21, 32, 43)',
+                borderRadius: '50%',
+              }}
+            />
           </div>
 
           <div className={styles.bio}>
-            <span> <i className="fa fa-birthday-cake" aria-hidden="true"></i> née le {user.utilisateur_datenaissance}</span>
-            <br/> <span><i className="fa fa-calendar"></i> Inscrit depuis {user.utilisateur_dateinscription}</span>
+            <h3>
+              {user.utilisateur_nom} {user.utilisateur_prenom}
+            </h3>
+
+            <span> née le {user.utilisateur_datenaissance}</span>
+            <br/>
+            <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
 
           </div>
         </div>

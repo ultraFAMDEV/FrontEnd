@@ -9,30 +9,18 @@
     height: 100%;
 }
 
-.banner {
-    display: flex;
+.headerImages {
     margin-top: 10px;
+    position: relative;
 }
 
-.profile {
-
+#profileHeader {
+    width: 700px;
+    height:200px;
 }
-
-/*.headerImages {*/
-/*    margin-top: 10px;*/
-/*    position: relative;*/
-/*}*/
-
-/*#profileHeader {*/
-/*    min-width: 10px;*/
-/*    max-width: 15px;*/
-/*}*/
-
 
 #profilePicture {
     border-radius: 50%;
-    width: 10px;
-    /*height: 10px;*/
     position: absolute;
     top: 130px;
     left: 20px;
