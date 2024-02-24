@@ -1,0 +1,47 @@
+.container {
+    position: absolute;
+    left: 300px;
+}
+
+.middle {
+    width: 700px;
+    /*border-right: 1px solid rgb(155, 157, 160);*/
+    height: 100%;
+}
+
+.banner {
+    display: flex;
+    margin-top: 10px;
+}
+
+.profile {
+
+}
+
+/*.headerImages {*/
+/*    margin-top: 10px;*/
+/*    position: relative;*/
+/*}*/
+
+/*#profileHeader {*/
+/*    min-width: 10px;*/
+/*    max-width: 15px;*/
+/*}*/
+
+
+#profilePicture {
+    border-radius: 50%;
+    width: 10px;
+    /*height: 10px;*/
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    border: 4px solid rgb(21, 32, 43);
+}
+
+.bio {
+    margin-top: 55px;
+    margin-left: 20px;
+    line-height: 40px;
+    font-size: 15px;
+}
