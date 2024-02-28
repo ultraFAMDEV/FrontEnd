@@ -1,7 +1,8 @@
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import styles from "@/styles/components/InscriptionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function InscriptionPage() {
   const [step, setStep] = useState(1);
@@ -11,12 +12,24 @@ export default function InscriptionPage() {
     email: "",
     function: "",
     civility: "homme",
+    birthdate: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      router.push("/");
+    }
+  }, []);
+
   const handleNext = async () => {
     if (step === 2) {
       try {
+        console.log("Data being sent to API:", userData);
+
         const response = await fetch(
           "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users",
           {
@@ -24,18 +37,24 @@ export default function InscriptionPage() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(userData),
+            body: JSON.stringify({
+              email: userData.email,
+              password: userData.password,
+              nom: userData.username,
+              prenom: userData.function,
+              datenaissance: userData.birthdate,
+            }),
           }
         );
 
         const result = await response.json();
 
         if (response.ok) {
+          localStorage.setItem("token", result.token);
           setSuccessMessage("Compte créé avec succès");
-          console.log("Compte créé avec succès:", result);
+          router.push("/");
         } else {
           setErrorMessage("Erreur lors de la création du compte");
-          console.error("Erreur lors de la création du compte:", result);
         }
       } catch (error) {
         console.error("Erreur lors de la communication avec l'API:", error);
@@ -137,6 +156,16 @@ export default function InscriptionPage() {
                   <option value="femme">Femme</option>
                   <option value="non-genre">Non genré</option>
                 </select>
+              </label>
+              {/* Champ pour la date de naissance */}
+              <label>
+                <input
+                  type="date"
+                  name="birthdate"
+                  value={userData.birthdate}
+                  onChange={handleInputChange}
+                  placeholder="Date de naissance"
+                />
               </label>
             </>
           )}

@@ -37,11 +37,11 @@ export default function Home() {
         <title>Accueil</title>
       </Head>
       <div>
-        {ressources.map((resource) => (
-          <ul key={resource.id}>
-            <li>{resource.ressource_titre}</li>
-            <li>{resource.ressource_contenu}</li>
-            <li>{resource.ressource_media}</li>
+        {ressources.map((resource, index) => (
+          <ul key={index}>
+            <li key={index + "_titre"}>{resource.ressource_titre}</li>
+            <li key={index + "_contenu"}>{resource.ressource_contenu}</li>
+            <li key={index + "_media"}>{resource.ressource_media}</li>
           </ul>
         ))}
       </div>
