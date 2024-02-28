@@ -3,25 +3,21 @@ import styles from "@/styles/components/Utilisateur.module.css";
 import Image from 'next/image'
 
 export async function  getServerSideProps({ query }) {
-  const endpoint = 'https://famdev.srvkoikarpfess.ddns.net/api/endpoints/getuser?id=' + query.id;
+  const endpoint = 'https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users?id=' + query.id;
   console.log(endpoint);
   const res = await fetch(endpoint);
   const user = await res.json()
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
   return {
     props: {
       user
     },
-
   }
 }
 
 export default function Page({ user })
 {
   return (
-    <div>
       <div className={styles.container}>
         <div className={styles.middle}>
           <div className={styles.headerImages}>
@@ -52,13 +48,24 @@ export default function Page({ user })
               {user.utilisateur_nom} {user.utilisateur_prenom}
             </h3>
 
-            <span> née le {user.utilisateur_datenaissance}</span>
-            <br/>
-            <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
+            {
+              Boolean(user.t_profil) ?
+              <p>user.t_profil.profil_description</p>
+              :
+              <p>Pas encore de description</p>
+            }
+
+            {
+              Boolean(user.utilisateur_datenaissance) &&
+              <div>
+                <span> née le {user.utilisateur_datenaissance}</span>
+                <br/>
+                <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
+              </div>
+            }
 
           </div>
         </div>
       </div>
-    </div>
   );
 }
