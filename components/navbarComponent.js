@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import DeconnexionAccount from "@/components/users/deconnexionAccountComponent";
 import style from "@/styles/components/Navbar.module.css";
 
 export default function NavbarComponent() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -18,8 +20,8 @@ export default function NavbarComponent() {
     setLoggedIn(false);
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
+  const redirectToHome = () => {
+    router.push("/");
   };
 
   return (
@@ -40,7 +42,10 @@ export default function NavbarComponent() {
               </li>
               <li>
                 <div>
-                  <DeconnexionAccount onLogout={handleLogout} />
+                  <DeconnexionAccount
+                    onLogout={handleLogout}
+                    redirectToHome={redirectToHome}
+                  />
                 </div>
               </li>
             </>

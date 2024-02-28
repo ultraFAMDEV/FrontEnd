@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function ProfilComponent() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -12,11 +14,13 @@ export default function ProfilComponent() {
         const token = localStorage.getItem("token");
 
         if (!token) {
-          throw new Error("Aucun token trouvé");
+          router.push("/connexion");
+          return;
         }
 
         const decodedToken = jwt.decode(token);
         const userId = decodedToken.id;
+
         const response = await fetch(
           `https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users?id=${userId}`,
           {
@@ -50,6 +54,11 @@ export default function ProfilComponent() {
     fetchUserData();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/");
+  };
+
   return (
     <>
       <Head>{user && <title>{user.utilisateur_prenom}</title>}</Head>
@@ -60,11 +69,11 @@ export default function ProfilComponent() {
           <>
             <h1>{user.utilisateur_prenom}</h1>
             <p>{user.t_profil.profil_description}</p>
-            <p>Nombre d'abonnements : {user.t_profil.profil_nbabonnement}</p>
-            <p>Nombres de ressources : {user.t_profil.profil_creations}</p>
+            <p>Abonnements : {user.t_profil.profil_nbabonnement}</p>
+            <p>Ressources : {user.t_profil.profil_creations}</p>
           </>
         ) : (
-          <p>Chargement de vos informations</p>
+          <p>Chargement des informations de l'utilisateur...</p>
         )}
       </div>
     </>

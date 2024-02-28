@@ -1,18 +1,13 @@
-import { useState } from "react";
+import React from "react";
 
-export default function DeconnexionAccount({ onLogout }) {
-  const [message, setMessage] = useState("");
-
+export default function DeconnexionAccountComponent({
+  onLogout,
+  redirectToHome,
+}) {
   const handleLogout = () => {
-    try {
-      localStorage.removeItem("token");
-      setMessage("Déconnexion réussie");
-      onLogout();
-    } catch (error) {
-      console.error("Erreur lors de la déconnexion:", error);
-      setMessage("Erreur lors de la déconnexion");
-    }
+    onLogout();
+    redirectToHome();
   };
 
-  return <span onClick={handleLogout}>Déconnexion</span>;
+  return <button onClick={handleLogout}>Déconnexion</button>;
 }
