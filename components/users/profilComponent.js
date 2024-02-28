@@ -8,6 +8,12 @@ export default function ProfilComponent() {
   const [error, setError] = useState(null);
   const router = useRouter();
 
+  // Fonction pour formater la date au format "jour mois année"
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("fr-FR", options);
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -20,7 +26,6 @@ export default function ProfilComponent() {
 
         const decodedToken = jwt.decode(token);
         const userId = decodedToken.id;
-
         const response = await fetch(
           `https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users?id=${userId}`,
           {
@@ -67,10 +72,18 @@ export default function ProfilComponent() {
           <p>{error}</p>
         ) : user ? (
           <>
-            <h1>{user.utilisateur_prenom}</h1>
+            <p>Nom : {user.utilisateur_nom}</p>
+            <p>Prénom : {user.utilisateur_prenom}</p>
+            <p>Rôle : {user.utilisateur_role}</p>
             <p>{user.t_profil.profil_description}</p>
+            <p>
+              Date de naissance : {formatDate(user.utilisateur_datenaissance)}
+            </p>
             <p>Abonnements : {user.t_profil.profil_nbabonnement}</p>
             <p>Ressources : {user.t_profil.profil_creations}</p>
+            <p>
+              Inscrit depuis le {formatDate(user.utilisateur_dateinscription)}
+            </p>
           </>
         ) : (
           <p>Chargement des informations de l'utilisateur...</p>
