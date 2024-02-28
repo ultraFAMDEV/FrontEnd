@@ -8,7 +8,7 @@ export default function Home() {
     const handleRessources = async () => {
       try {
         const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/getressource",
+          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources",
           {
             method: "GET",
             headers: {

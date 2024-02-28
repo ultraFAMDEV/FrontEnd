@@ -8,6 +8,7 @@ export default function ComponentConnexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -40,10 +41,11 @@ export default function ComponentConnexion() {
         setToken(data.token);
         router.push("/");
       } else {
-        console.error("Échec de la connexion:", data.error);
+        setError(data.error);
       }
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
+      setError("Erreur lors de la connexion, veuillez réessayer.");
     }
   };
 
@@ -63,6 +65,7 @@ export default function ComponentConnexion() {
             Pas encore inscrit ? Inscrivez-vous !
           </Link>
           <p className={styles.connexion}>Connexion</p>
+          {error && <p className={styles.error}>{error}</p>}
           <label>
             <input
               placeholder="Nom d'utilisateur"

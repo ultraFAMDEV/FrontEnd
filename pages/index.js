@@ -1,11 +1,19 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import HomeComponent from "@/components/homeComponent";
+import NavbarComponent from "@/components/navbar";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,17 +22,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <nav>
+        <NavbarComponent />
+      </nav>
       <main>
-        <ul>
-          <li>
-            <Link href="/connexion">Connexion</Link>
-          </li>
-          <li>
-            <Link href="/inscription">Inscription</Link>
-          </li>
-        </ul>
+        <HomeComponent />
       </main>
-      <HomeComponent />
     </>
   );
 }
