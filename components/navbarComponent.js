@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import DeconnexionAccount from "@/components/users/deconnexionAccount";
+import DeconnexionAccount from "@/components/users/deconnexionAccountComponent";
 
 export default function NavbarComponent() {
   const [loggedIn, setLoggedIn] = useState(false);

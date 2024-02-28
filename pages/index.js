@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import HomeComponent from "@/components/homeComponent";
-import NavbarComponent from "@/components/navbar";
+import NavbarComponent from "@/components/navbarComponent";
 
 export default function Home() {
   const [loggedIn, setLoggedIn] = useState(false);
