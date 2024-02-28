@@ -7,10 +7,9 @@ import Link from "next/link";
 export default function InscriptionPage() {
   const [step, setStep] = useState(1);
   const [userData, setUserData] = useState({
-    username: "",
-    password: "",
     email: "",
-    function: "",
+    password: "",
+    confirmPassword: "",
     civility: "homme",
     birthdate: "",
   });
@@ -26,6 +25,13 @@ export default function InscriptionPage() {
   }, []);
 
   const handleNext = async () => {
+    if (step === 1) {
+      if (userData.password !== userData.confirmPassword) {
+        setErrorMessage("Les mots de passe ne correspondent pas.");
+        return;
+      }
+    }
+
     if (step === 2) {
       try {
         console.log("Data being sent to API:", userData);
@@ -105,10 +111,11 @@ export default function InscriptionPage() {
               <p className={styles.inscription}>Inscription</p>
               <label>
                 <input
-                  name="username"
-                  value={userData.username}
+                  name="email"
+                  value={userData.email}
                   onChange={handleInputChange}
-                  placeholder="Nom d'utilisateur"
+                  placeholder="Adresse mail"
+                  type="email"
                 />
               </label>
               <label>
@@ -120,6 +127,15 @@ export default function InscriptionPage() {
                   placeholder="Mot de passe"
                 />
               </label>
+              <label>
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  value={userData.confirmPassword}
+                  onChange={handleInputChange}
+                  placeholder="Confirmer le mot de passe"
+                />
+              </label>
             </>
           )}
           {step === 2 && (
@@ -128,11 +144,11 @@ export default function InscriptionPage() {
               <p className={styles.inscription}>Compléter mon profil</p>
               <label>
                 <input
-                  type="email"
-                  name="email"
-                  value={userData.email}
+                  type="text"
+                  name="username"
+                  value={userData.username}
                   onChange={handleInputChange}
-                  placeholder="Adresse mail"
+                  placeholder="Nom"
                 />
               </label>
               <label>
@@ -141,7 +157,7 @@ export default function InscriptionPage() {
                   name="function"
                   value={userData.function}
                   onChange={handleInputChange}
-                  placeholder="Fonction"
+                  placeholder="Prénom"
                 />
               </label>
               <label>

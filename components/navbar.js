@@ -5,6 +5,7 @@ import DeconnexionAccount from "@/components/users/deconnexionAccount";
 export default function NavbarComponent() {
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // Vérifier si l'utilisateur est connecté au chargement initial
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
@@ -12,8 +13,15 @@ export default function NavbarComponent() {
     }
   }, []);
 
+  // Fonction pour gérer la déconnexion
   const handleLogout = () => {
-    setLoggedIn(false);
+    localStorage.removeItem("token"); // Supprimer le token
+    setLoggedIn(false); // Mettre à jour l'état de connexion
+  };
+
+  // Fonction pour gérer la connexion
+  const handleLogin = () => {
+    setLoggedIn(true); // Mettre à jour l'état de connexion
   };
 
   return (
