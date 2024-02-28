@@ -1,4 +1,4 @@
-import ComponentConnexion from "@/components/connexionAccount";
+import ComponentConnexion from "@/components/users/connexionAccountComponent";
 export default function Connexion() {
   return (
     <>
