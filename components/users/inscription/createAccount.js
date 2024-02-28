@@ -2,7 +2,7 @@ import styles from "@/styles/components/InscriptionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import ComponentInscriptionSuite from "@/components/inscription/suiteCreateAccount";
+import ComponentInscriptionSuite from "@/components/users/inscription/suiteCreateAccount";
 
 export default function ComponentInscription() {
   const [step, setStep] = useState(1); // État pour suivre l'étape actuelle

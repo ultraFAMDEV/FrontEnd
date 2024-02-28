@@ -1,4 +1,4 @@
-import ComponentInscription from "@/components/inscription/createAccount";
+import ComponentInscription from "@/components/users/inscription/createAccount";
 export default function Inscription() {
   return (
     <>
