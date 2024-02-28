@@ -16,7 +16,7 @@ export default function ComponentInscription() {
     if (step === 2) {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/endpoints/createaccountEND",
+          "http://localhost:3001/api/endpoints/createaccount",
           {
             method: "POST",
             headers: {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/components/ConnexionAccount.module.css";
 import Head from "next/head";
@@ -7,12 +7,21 @@ import Link from "next/link";
 export default function ComponentConnexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+      router.push("/"); // Redirection si un token est déjà stocké
+    }
+  }, []);
 
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/loginEND",
+        "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/login",
         {
           method: "POST",
           headers: {
@@ -22,11 +31,16 @@ export default function ComponentConnexion() {
         }
       );
 
+      const data = await response.json();
+
       if (response.ok) {
         console.log("Connexion réussie !");
+        // Stockage du token dans le localStorage
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
         router.push("/");
       } else {
-        console.error("Échec de la connexion");
+        console.error("Échec de la connexion:", data.error);
       }
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
@@ -50,7 +64,11 @@ export default function ComponentConnexion() {
           </Link>
           <p className={styles.connexion}>Connexion</p>
           <label>
-            <input placeholder="Nom d'utilisateur" />
+            <input
+              placeholder="Nom d'utilisateur"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
           <label>
             <input
@@ -64,7 +82,12 @@ export default function ComponentConnexion() {
             <input type="checkbox" />
             Se souvenir de moi
           </label>
-          <div className={styles.button}>Se connecter</div>
+          <div className={styles.button} onClick={handleLogin}>
+            Se connecter
+          </div>
+          <Link className={styles.linkConnexion} href="/">
+            Continuer en tant qu'invité
+          </Link>
           <Link className={styles.linkConnexion} href="/">
             Annuler, revenir à l'accueil
           </Link>

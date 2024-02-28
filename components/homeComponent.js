@@ -8,7 +8,7 @@ export default function Home() {
     const handleRessources = async () => {
       try {
         const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/getressourceEND",
+          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/getressource",
           {
             method: "GET",
             headers: {
@@ -28,22 +28,23 @@ export default function Home() {
       }
     };
 
-    handleRessources(); // Appeler la fonction au chargement de la page
-  }, []); // Utiliser un tableau vide pour n'exécuter qu'une seule fois
+    handleRessources();
+  }, []);
 
   return (
     <>
       <Head>
         <title>Accueil</title>
       </Head>
-      <ul>
-        {ressources.map((resource, index) => (
-          <>
-            <li key={index}>{resource.ressource_titre}</li>
-            <li key={index}>{resource.ressource_contenu}</li>
-          </>
+      <div>
+        {ressources.map((resource) => (
+          <ul key={resource.id}>
+            <li>{resource.ressource_titre}</li>
+            <li>{resource.ressource_contenu}</li>
+            <li>{resource.ressource_media}</li>
+          </ul>
         ))}
-      </ul>
+      </div>
     </>
   );
 }
