@@ -2,21 +2,23 @@ import styles from "@/styles/components/InscriptionAccount.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import ComponentInscriptionSuite from "@/components/users/inscription/suiteCreateAccount";
 
-export default function ComponentInscription() {
-  const [step, setStep] = useState(1); // État pour suivre l'étape actuelle
+export default function InscriptionPage() {
+  const [step, setStep] = useState(1);
   const [userData, setUserData] = useState({
     username: "",
     password: "",
+    email: "",
+    function: "",
+    civility: "homme",
   });
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const handleNext = async () => {
-    // Si c'est la deuxième étape, appeler l'API pour créer le compte
     if (step === 2) {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/endpoints/createaccount",
+          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users",
           {
             method: "POST",
             headers: {
@@ -29,10 +31,10 @@ export default function ComponentInscription() {
         const result = await response.json();
 
         if (response.ok) {
-          // Le compte a été créé avec succès
+          setSuccessMessage("Compte créé avec succès");
           console.log("Compte créé avec succès:", result);
         } else {
-          // Il y a eu une erreur lors de la création du compte
+          setErrorMessage("Erreur lors de la création du compte");
           console.error("Erreur lors de la création du compte:", result);
         }
       } catch (error) {
@@ -40,16 +42,13 @@ export default function ComponentInscription() {
       }
     }
 
-    // Passer à l'étape suivante
     setStep(step + 1);
   };
 
   const handlePrev = () => {
-    // Revenir à l'étape précédente
     setStep(step - 1);
   };
 
-  // Gérer les changements des champs du formulaire
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevUserData) => ({
@@ -73,7 +72,6 @@ export default function ComponentInscription() {
           <Link className={styles.linkConnexion} href="/connexion">
             Vous êtes déjà inscrit ? Connectez-vous !
           </Link>
-
           {/* Bouton "Retour" */}
           <div
             className={styles.button}
@@ -82,7 +80,6 @@ export default function ComponentInscription() {
           >
             Retour
           </div>
-
           {step === 1 && (
             <>
               {/* Première étape du formulaire */}
@@ -106,13 +103,48 @@ export default function ComponentInscription() {
               </label>
             </>
           )}
-
-          {step === 2 && <ComponentInscriptionSuite />}
-
+          {step === 2 && (
+            <>
+              {/* Deuxième étape du formulaire */}
+              <p className={styles.inscription}>Compléter mon profil</p>
+              <label>
+                <input
+                  type="email"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleInputChange}
+                  placeholder="Adresse mail"
+                />
+              </label>
+              <label>
+                <input
+                  type="text"
+                  name="function"
+                  value={userData.function}
+                  onChange={handleInputChange}
+                  placeholder="Fonction"
+                />
+              </label>
+              <label>
+                <select
+                  id="civility"
+                  name="civility"
+                  className={styles.civilite}
+                  value={userData.civility}
+                  onChange={handleInputChange}
+                >
+                  <option value="homme">Homme</option>
+                  <option value="femme">Femme</option>
+                  <option value="non-genre">Non genré</option>
+                </select>
+              </label>
+            </>
+          )}
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}{" "}
+          {successMessage && <p className={styles.success}>{successMessage}</p>}{" "}
           <div className={styles.button} onClick={handleNext}>
             {step === 1 ? "Suivant" : "Créer mon profil"}
           </div>
-
           <Link className={styles.linkCancel} href="/">
             Annuler, revenir à l'accueil
           </Link>
