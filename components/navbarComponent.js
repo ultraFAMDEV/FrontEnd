@@ -37,6 +37,11 @@ export default function NavbarComponent() {
               </li>
               <li>
                 <div>
+                  <Link href="/utilisateurs">Utilisateurs</Link>
+                </div>
+              </li>
+              <li>
+                <div>
                   <Link href="/profil">Profil</Link>
                 </div>
               </li>
