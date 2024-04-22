@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import style from "@/styles/components/RessourcesHome.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const [ressources, setRessources] = useState([]);
@@ -50,7 +51,10 @@ export default function Home() {
             </li>
             <li key={index + "_contenu"}>{resource.ressource_contenu}</li>
             <li key={index + "_media"}>{resource.ressource_media}</li>
-            <img src={resource.ressource_media}></img>
+            <img
+              src={`https://famdev.srvkoikarpfess.ddns.net/api/endpoints/images?image=${resource.ressource_media}`}
+            />
+            <Link href="/">next</Link>
           </ul>
         ))}
       </div>

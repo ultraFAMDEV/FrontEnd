@@ -12,6 +12,10 @@
     list-style: none;
 }
 
+.ressources img {
+    width: 30%;
+}
+
 .buttonRessources {
     background-color: pink;
     border: 1px solid orange;
