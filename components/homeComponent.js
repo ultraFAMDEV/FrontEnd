@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import style from "@/styles/components/RessourcesHome.module.css";
+import Link from "next/link";
 
 export default function Home() {
   const [ressources, setRessources] = useState([]);
@@ -38,10 +40,17 @@ export default function Home() {
       </Head>
       <div>
         {ressources.map((resource, index) => (
-          <ul key={index}>
-            <li key={index + "_titre"}>{resource.ressource_titre}</li>
+          <ul key={index} className={style.ressources}>
+            <h1 key={index + "_titre"}>{resource.ressource_titre}</h1>
+            <li key={index + "_contenu"}>
+              Auteur : {resource.t_utilisateur.utilisateur_nom}
+            </li>
+            <li key={index + "_contenu"}>
+              Catégorie : {resource.t_categories.nom_categorie}
+            </li>
             <li key={index + "_contenu"}>{resource.ressource_contenu}</li>
             <li key={index + "_media"}>{resource.ressource_media}</li>
+            <img src={resource.ressource_media}></img>
           </ul>
         ))}
       </div>
