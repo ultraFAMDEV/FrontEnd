@@ -1,21 +1,28 @@
 import React from 'react'
 import styles from "@/styles/components/Utilisateur.module.css";
 import Image from 'next/image'
+import Ressources from '@/components/ressources/ressources';
 
 export async function  getServerSideProps({ query }) {
   const endpoint = 'https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users?id=' + query.id;
-  console.log(endpoint);
   const res = await fetch(endpoint);
   const user = await res.json()
 
+  const res2 = await fetch('https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources');
+  const ressources = await res2.json();
+
   return {
     props: {
-      user
+      user,
+      ressources
     },
   }
 }
 
-export default function Page({ user })
+export default function Page({
+                               user,
+                               ressources
+})
 {
   return (
       <div className={styles.container}>
@@ -63,6 +70,7 @@ export default function Page({ user })
                 <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
               </div>
             }
+            <Ressources ressources={ressources}/>
 
           </div>
         </div>
