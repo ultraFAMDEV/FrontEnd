@@ -6,8 +6,8 @@
     margin: 0;
     display: flex;
     justify-content: center;
-    background-color: red;
     padding: 30px;
+    border-bottom: 1px solid black;
 }
 
 .navbar li {
@@ -15,6 +15,7 @@
     color: black;
     font-family: "Roboto", sans-serif;
     font-size: large;
+    text-transform: uppercase;
     
 }
 
