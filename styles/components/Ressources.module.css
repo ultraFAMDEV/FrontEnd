@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ressources {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.ressourceTitle {
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+.ressources li {
+    list-style: none;
+}
+
+.ressources img {
+    width: 30%;
+}
+
+.discover {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+}
+
+.card li {
+    margin: 2px;
+}
+
+.avatar {
+    display: flex;
+    justify-content: end;
+    overflow: hidden;
+    object-fit: cover;
+    width: 30%;
+}
+
+.interraction {
+    display: flex;
+    flex-direction: row;
+}
+.interraction li{
+    margin: 10px;
+}
