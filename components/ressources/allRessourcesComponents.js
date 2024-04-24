@@ -47,7 +47,7 @@ export default function AllRessourcesComponents() {
           <ul key={index} className={style.ressources}>
             <div className={style.card}>
               <div className={style.avatar}>
-                <img src="/boy.png" className={style.logo} />
+                <img src="/boy.png" />
               </div>
               <div className={style.content}>
                 <li>

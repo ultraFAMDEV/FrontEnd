@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import style from "@/styles/components/Profil.module.css";
 
 export default function ProfilComponent() {
   const [user, setUser] = useState(null);
@@ -9,10 +10,10 @@ export default function ProfilComponent() {
   const router = useRouter();
 
   // Fonction pour formater la date au format "jour mois année"
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "2-digit" };
-    return new Date(dateString).toLocaleDateString("fr-FR", options);
-  };
+  // const formatDate = (dateString) => {
+  // const options = { year: "numeric", month: "long", day: "2-digit" };
+  //return new Date(dateString).toLocaleDateString("fr-FR", options);
+  //};
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -66,24 +67,33 @@ export default function ProfilComponent() {
 
   return (
     <>
-      <Head>{user && <title>{user.utilisateur_prenom}</title>}</Head>
-      <div>
+      <Head>
+        {user && (
+          <title>
+            (RE)ssource - {user.utilisateur_prenom} {user.utilisateur_nom}
+          </title>
+        )}
+      </Head>
+      <div className={style.container}>
         {error ? (
           <p>{error}</p>
         ) : user ? (
           <>
-            <p>Nom : {user.utilisateur_nom}</p>
-            <p>Prénom : {user.utilisateur_prenom}</p>
-            <p>Rôle : {user.utilisateur_role}</p>
-            <p>{user.t_profil.profil_description}</p>
-            <p>
-              Date de naissance : {formatDate(user.utilisateur_datenaissance)}
+            <img src="/boy.png" className={style.avatar} />
+            <p className={style.name}>
+              {user.utilisateur_prenom} {""}
+              {user.utilisateur_nom}
             </p>
-            <p>Abonnements : {user.t_profil.profil_nbabonnement}</p>
-            <p>Ressources : {user.t_profil.profil_creations}</p>
+            <p className={style.description}>
+              {user.t_profil.profil_description}
+            </p>
             <p>
+              Abonnements : {user.t_profil.profil_nbabonnement} Créations :{" "}
+              {user.t_profil.profil_creations}
+            </p>
+            {/*<p>
               Inscrit depuis le {formatDate(user.utilisateur_dateinscription)}
-            </p>
+        </p>*/}
           </>
         ) : (
           <p>Chargement des informations de l'utilisateur...</p>
