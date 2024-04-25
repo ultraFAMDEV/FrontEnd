@@ -68,7 +68,7 @@ export default function ComponentConnexion() {
           {error && <p className={styles.error}>{error}</p>}
           <label>
             <input
-              placeholder="Nom d'utilisateur"
+              placeholder="Adresse mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.container p {
+    margin: 5px;
+}
+.avatar {
+    object-fit: cover;
+    width: 10%;
+    border-radius: 50%;
+    background-color: red;
+    margin: 2px;
+}
+
+.name{
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.description {
+    font-weight: bold;
+}
