@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import style from "@/styles/components/Ressources.module.css";
+import style from "@/styles/components/ressources/Ressources.module.css";
 import Link from "next/link";
 
 export default function AllRessourcesComponents() {
@@ -46,19 +46,23 @@ export default function AllRessourcesComponents() {
         {ressources.map((ressource, index) => (
           <ul key={index} className={style.ressources}>
             <div className={style.card}>
-              <div className={style.avatar}>
-                <img src="/boy.png" />
+              <div className={style.avatarContainer}>
+                <img src="/boy.png" className={style.avatar} />
+                <div>
+                  <li>
+                    {ressource.t_utilisateur.utilisateur_prenom} <span> </span>
+                    {ressource.t_utilisateur.utilisateur_nom}
+                  </li>
+                  <h1 className={style.ressourceTitle}>
+                    {ressource.ressource_titre}
+                  </h1>
+                </div>
               </div>
               <div className={style.content}>
-                <li>
-                  {ressource.t_utilisateur.utilisateur_prenom} <span> </span>
-                  {ressource.t_utilisateur.utilisateur_nom}
-                </li>
-                <h1>{ressource.ressource_titre}</h1>
                 <img
+                  className={style.ressourceMedia}
                   src={`https://famdev.srvkoikarpfess.ddns.net/api/endpoints/images?image=${ressource.ressource_media}`}
                 />
-                <br></br>
                 <Link
                   href={`/ressources/${ressource.ressource_id}`}
                   className={style.discover}
@@ -67,11 +71,11 @@ export default function AllRessourcesComponents() {
                 </Link>
                 <div className={style.interraction}>
                   <li>
-                    <span class="material-symbols-outlined">favorite</span>
+                    <span className="material-symbols-outlined">favorite</span>
                     {ressource.nbLikes}
                   </li>
                   <li>
-                    <span class="material-symbols-outlined">chat</span>3
+                    <span className="material-symbols-outlined">chat</span>3
                   </li>
                 </div>
               </div>

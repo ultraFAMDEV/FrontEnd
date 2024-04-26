@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.avatarName {
+    display: flex;
+    flex-direction: row;
+}
+
+.avatarName img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.avatarName li {
+    list-style: none;
+}
+
+.h1 {
+    font-size: 30px;
+}
+
+.imgRessource {
+    width: 300px;
+}
+
+.interraction{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.interraction li{
+    list-style-type: none;
+    margin: 3px;
+}
+
+.detailRessource{
+    display: flex;
+        flex-wrap: wrap;
+}
+
+.detailRessource li {
+    list-style-type: none;
+    margin: 3px;
+}
