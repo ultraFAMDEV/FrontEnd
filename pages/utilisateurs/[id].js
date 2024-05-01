@@ -57,7 +57,7 @@ export default function Page({
 
             {
               Boolean(user.t_profil)
-                ? <p>user.t_profil.profil_description</p>
+                ? <p>{user.t_profil.profil_description}</p>
                 : <p>Pas encore de description</p>
             }
 
@@ -74,7 +74,6 @@ export default function Page({
                 ? <Ressources ressources={ressources}/>
                 : <p>{user.utilisateur_prenom} n'a pas encore publier de ressource</p>
             }
-
 
           </div>
         </div>
