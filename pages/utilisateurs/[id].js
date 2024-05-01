@@ -8,7 +8,7 @@ export async function  getServerSideProps({ query }) {
   const res = await fetch(endpoint);
   const user = await res.json()
 
-  const res2 = await fetch('https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources');
+  const res2 = await fetch('https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources?user_id=' + query.id );
   const ressources = await res2.json();
 
   return {
@@ -56,10 +56,9 @@ export default function Page({
             </h3>
 
             {
-              Boolean(user.t_profil) ?
-              <p>user.t_profil.profil_description</p>
-              :
-              <p>Pas encore de description</p>
+              Boolean(user.t_profil)
+                ? <p>user.t_profil.profil_description</p>
+                : <p>Pas encore de description</p>
             }
 
             {
@@ -70,7 +69,12 @@ export default function Page({
                 <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
               </div>
             }
-            <Ressources ressources={ressources}/>
+            {
+              ressources.length !== 0
+                ? <Ressources ressources={ressources}/>
+                : <p>{user.utilisateur_prenom} n'a pas encore publier de ressource</p>
+            }
+
 
           </div>
         </div>
