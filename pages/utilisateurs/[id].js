@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Ressources from '@/components/ressources/ressources';
 
 export async function  getServerSideProps({ query }) {
-  const endpoint = 'https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users?id=' + query.id;
+  const endpoint = process.env.API_ENDPOINT + 'users?id=' + query.id;
   const res = await fetch(endpoint);
   const user = await res.json()
 
-  const res2 = await fetch('https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources?user_id=' + query.id );
+  const res2 = await fetch(process.env.API_ENDPOINT + 'ressources?user_id=' + query.id );
   const ressources = await res2.json();
 
   return {
@@ -72,7 +72,7 @@ export default function Page({
             {
               ressources.length !== 0
                 ? <Ressources ressources={ressources}/>
-                : <p>{user.utilisateur_prenom} n'a pas encore publier de ressource</p>
+                : <p>{user.utilisateur_prenom} n a pas encore publier de ressource</p>
             }
 
           </div>
