@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "@/styles/components/Utilisateur.module.css";
 import Image from 'next/image'
 import Ressources from '@/components/ressources/ressources';
+import NavbarComponent from "@/components/navbarComponent";
 
 export async function  getServerSideProps({ query }) {
   const endpoint = process.env.API_ENDPOINT + 'users?id=' + query.id;
@@ -26,6 +27,7 @@ export default function Page({
 {
   return (
       <div className={styles.container}>
+        <NavbarComponent />
         <div className={styles.middle}>
           <div className={styles.headerImages}>
             <Image
@@ -70,7 +72,7 @@ export default function Page({
               </div>
             }
             {
-              ressources.length !== 0
+              ressources.ressources.length !== 0
                 ? <Ressources ressources={ressources}/>
                 : <p>{user.utilisateur_prenom} n a pas encore publier de ressource</p>
             }
