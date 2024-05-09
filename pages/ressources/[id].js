@@ -15,7 +15,7 @@ export default function Ressource() {
     const fetchRessources = async () => {
       try {
         const response = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources?id=${id}`,
+          `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources?id=${id}`,
           {
             method: "GET",
             headers: {
@@ -64,7 +64,7 @@ export default function Ressource() {
               <h1>{ressource.ressource_titre}</h1>
               <img
                 className={style.imgRessource}
-                src={`https://famdev.srvkoikarpfess.ddns.net/api/endpoints/images?image=${ressource.ressource_media}`}
+                src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
                 alt="Ressource Media"
               />
               <div>{ressource.ressource_contenu}</div>

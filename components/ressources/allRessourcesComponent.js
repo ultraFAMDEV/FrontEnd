@@ -10,7 +10,7 @@ export default function AllRessourcesComponents() {
     const fetchRessources = async () => {
       try {
         const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/ressources",
+          "https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources",
           {
             method: "GET",
             headers: {
@@ -61,7 +61,7 @@ export default function AllRessourcesComponents() {
               <div className={style.content}>
                 <img
                   className={style.ressourceMedia}
-                  src={`https://famdev.srvkoikarpfess.ddns.net/api/endpoints/images?image=${ressource.ressource_media}`}
+                  src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
                 />
                 <Link
                   href={`/ressources/${ressource.ressource_id}`}
@@ -75,7 +75,8 @@ export default function AllRessourcesComponents() {
                     {ressource.nbLikes}
                   </li>
                   <li>
-                    <span className="material-symbols-outlined">chat</span>3
+                    <span className="material-symbols-outlined">chat</span>
+                    {ressource.nbCommentaire}
                   </li>
                 </div>
               </div>

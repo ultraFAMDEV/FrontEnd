@@ -22,7 +22,7 @@ export default function ComponentConnexion() {
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/login",
+        "https://famdev.srvkoikarpfess.ddns.net/api/v1/login",
         {
           method: "POST",
           headers: {

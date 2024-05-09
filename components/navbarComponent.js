@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import DeconnexionAccount from "@/components/users/deconnexionAccountComponent";
 import style from "@/styles/components/Navbar.module.css";
+import NewRessource from "./ressources/newRessourcesCompoenent";
 
 export default function NavbarComponent() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -43,6 +44,11 @@ export default function NavbarComponent() {
               <li>
                 <div>
                   <Link href="/profil">Profil</Link>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Link href="/ressources/newressource">Poster</Link>
                 </div>
               </li>
               <li>

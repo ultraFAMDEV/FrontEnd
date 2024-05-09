@@ -12,6 +12,8 @@ export default function InscriptionPage() {
     confirmPassword: "",
     civility: "homme",
     birthdate: "",
+    username: "", // Ajout de cette ligne pour initialiser le champ "username"
+    function: "", // Ajout de cette ligne pour initialiser le champ "function"
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -36,20 +38,18 @@ export default function InscriptionPage() {
       try {
         console.log("Data being sent to API:", userData);
 
+        const formData = new FormData();
+        formData.append("email", userData.email);
+        formData.append("password", userData.password);
+        formData.append("nom", userData.username);
+        formData.append("prenom", userData.function);
+        formData.append("datenaissance", userData.birthdate);
+
         const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users",
+          "https://famdev.srvkoikarpfess.ddns.net/api/v1/users",
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: userData.email,
-              password: userData.password,
-              nom: userData.username,
-              prenom: userData.function,
-              datenaissance: userData.birthdate,
-            }),
+            body: formData,
           }
         );
 

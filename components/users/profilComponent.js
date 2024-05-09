@@ -28,7 +28,7 @@ export default function ProfilComponent() {
         const decodedToken = jwt.decode(token);
         const userId = decodedToken.id;
         const response = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users?id=${userId}`,
+          `https://famdev.srvkoikarpfess.ddns.net/api/v1/users?id=${userId}`,
           {
             method: "GET",
             headers: {
