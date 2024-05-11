@@ -63,21 +63,25 @@ export default function AllRessourcesComponents() {
                   className={style.ressourceMedia}
                   src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
                 />
-                <Link
-                  href={`/ressources/${ressource.ressource_id}`}
-                  className={style.discover}
-                >
-                  Consulter la ressource
-                </Link>
-                <div className={style.interraction}>
-                  <li>
-                    <span className="material-symbols-outlined">favorite</span>
-                    {ressource.nbLikes}
-                  </li>
-                  <li>
-                    <span className="material-symbols-outlined">chat</span>
-                    {ressource.nbCommentaire}
-                  </li>
+                <div className={style.resourceActions}>
+                  <Link
+                    href={`/ressources/${ressource.ressource_id}`}
+                    className={style.discover}
+                  >
+                    Consulter la ressource
+                  </Link>
+                  <div className={style.interraction}>
+                    <li>
+                      <span className="material-symbols-outlined">
+                        favorite
+                      </span>
+                      {ressource.nbLikes}
+                    </li>
+                    <li>
+                      <span className="material-symbols-outlined">chat</span>
+                      {ressource.nbCommentaire}
+                    </li>
+                  </div>
                 </div>
               </div>
             </div>

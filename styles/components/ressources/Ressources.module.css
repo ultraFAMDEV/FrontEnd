@@ -9,14 +9,24 @@
     max-width: 800px;
     margin: 0 auto;
     margin-bottom: 10px;
+    list-style-type: none;
+    /* Supprimer les points de puce de liste */
 }
 
 .card {
+    width: 800px;
+    /* Largeur de votre carte */
+    margin: 20px auto;
+    /* Marge auto pour centrer horizontalement */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    /* Afficher en colonne */
     align-items: center;
-    margin-bottom: 20px;
-    /* Espacement entre les ressources */
+    /* Centrer verticalement */
 }
 
 .avatarContainer {
@@ -34,13 +44,16 @@
 }
 
 .content {
+    flex: 1;
+    /* Utilise tout l'espace restant */
     display: flex;
     flex-direction: column;
+    /* Afficher les éléments en colonnes */
     align-items: center;
 }
 
 .ressourceTitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-top: 10px;
 }
 
@@ -53,14 +66,21 @@
 .discover {
     text-decoration: none;
     font-size: 20px;
-    color: black;
+    color: #03989E;
+    /* Ajout de la couleur bleue */
     margin-top: 10px;
     display: block;
+}
+
+.discover:hover {
+    text-decoration: underline;
+    /* Souligner au survol */
 }
 
 .interraction {
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
 }
 
 .interraction li {

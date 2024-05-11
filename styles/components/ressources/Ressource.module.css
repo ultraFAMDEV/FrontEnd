@@ -1,49 +1,65 @@
+/* Ressource.module.css */
+
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%; /* Prend toute la largeur disponible */
+  padding: 20px;
+  text-align: center;
 }
 
 .avatarName {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* Centrer horizontalement */
+  margin-bottom: 10px;
 }
 
 .avatarName img {
-    width: 100px;
-    border-radius: 50%;
+  width: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .avatarName li {
-    list-style: none;
+  list-style: none;
 }
 
-.h1 {
-    font-size: 30px;
+.title {
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 .imgRessource {
-    width: 300px;
+  width: 300px;
+  margin-bottom: 10px;
 }
 
-.interraction{
-    display: flex;
-    flex-wrap: wrap;
+.interraction {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.interraction li{
-    list-style-type: none;
-    margin: 3px;
+.interraction li {
+  margin: 3px;
 }
 
-.detailRessource{
-    display: flex;
-        flex-wrap: wrap;
+.interraction li:not(:last-child) {
+  margin-right: 10px;
+}
+
+.detailRessource {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .detailRessource li {
-    list-style-type: none;
-    margin: 3px;
+  list-style-type: none;
+  margin: 3px;
 }
