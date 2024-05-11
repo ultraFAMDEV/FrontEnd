@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import style from "@/styles/components/ressources/Ressource.module.css";
-import Link from "next/link";
 import NavbarComponent from "@/components/navbarComponent";
+import NouveauCommentaireForm from "@/components/ressources/newCommentaireComponent";
 
 export default function Ressource() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function Ressource() {
         );
         if (response.ok) {
           const data = await response.json();
-          setRessource(data[0]); // Set la première ressource trouvée
+          setRessource(data[0]);
         } else {
           console.error("Échec lors de la récupération de la ressource");
         }
@@ -63,6 +63,31 @@ export default function Ressource() {
     }
   }, [id]);
 
+  const handleSubmit = async (nouveauCommentaireTexte) => {
+    try {
+      const response = await fetch(
+        `https://famdev.srvkoikarpfess.ddns.net/api/v1/commentaire`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ressource_id: id,
+            commentaire_texte: nouveauCommentaireTexte,
+          }),
+        }
+      );
+      if (response.ok) {
+        fetchCommentaires();
+      } else {
+        console.error("Échec lors de l'ajout du commentaire");
+      }
+    } catch (error) {
+      console.error("Échec lors de l'ajout du commentaire:", error);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -91,7 +116,7 @@ export default function Ressource() {
             />
             <div>{ressource.ressource_contenu}</div>
             <div className={style.interraction}>
-              <span class="material-symbols-outlined">visibility</span>
+              <span className="material-symbols-outlined">visibility</span>
               {ressource.ressource_nombre_de_vues}
               <span className="material-symbols-outlined">favorite</span>
               {ressource.nbLikes}
@@ -100,11 +125,10 @@ export default function Ressource() {
             </div>
 
             <div className={style.detailRessource}>
-              <li>Visibilié : {ressource.ressource_visibilite}</li>
+              <li>Visibilité : {ressource.ressource_visibilite}</li>
               <li>Catégorie : {ressource.t_categories.nom_categorie}</li>
             </div>
 
-            {/* Affichage des commentaires */}
             <h2>Commentaires :</h2>
             {commentaires.map((commentaire) => (
               <div key={commentaire.commentaire_id}>
@@ -117,6 +141,8 @@ export default function Ressource() {
                 </p>
               </div>
             ))}
+
+            <NouveauCommentaireForm onSubmit={handleSubmit} resourceId={id} />
           </ul>
         )}
       </div>

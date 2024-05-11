@@ -4,10 +4,13 @@
     flex-direction: column;
     align-items: center;
     border-bottom: 1px solid black;
+    padding: 20px;
 }
+
 .container p {
     margin: 5px;
 }
+
 .avatar {
     object-fit: cover;
     width: 10%;
@@ -16,11 +19,29 @@
     margin: 2px;
 }
 
-.name{
+.name {
     font-size: 30px;
     text-transform: uppercase;
 }
 
 .description {
     font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .avatar {
+        width: 50px;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
 }

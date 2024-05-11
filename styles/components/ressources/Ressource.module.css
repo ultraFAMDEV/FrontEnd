@@ -1,65 +1,79 @@
-/* Ressource.module.css */
-
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%; /* Prend toute la largeur disponible */
-  padding: 20px;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
 }
 
 .avatarName {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; /* Centrer horizontalement */
-  margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 .avatarName img {
-  width: 100px;
-  border-radius: 50%;
-  margin-right: 10px;
+    width: 20%;
+    max-width: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .avatarName li {
-  list-style: none;
+    list-style: none;
 }
 
 .title {
-  font-size: 30px;
-  margin-bottom: 10px;
+    font-size: 4vw;
+    margin-bottom: 10px;
 }
 
 .imgRessource {
-  width: 300px;
-  margin-bottom: 10px;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 10px;
 }
 
 .interraction {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 .interraction li {
-  margin: 3px;
+    margin: 3px;
 }
 
 .interraction li:not(:last-child) {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .detailRessource {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .detailRessource li {
-  list-style-type: none;
-  margin: 3px;
+    list-style-type: none;
+    margin: 3px;
+}
+
+@media (min-width: 768px) {
+
+    .avatarName img {
+        max-width: 150px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .imgRessource {
+        max-width: 400px;
+    }
 }

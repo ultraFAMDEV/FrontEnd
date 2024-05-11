@@ -11,10 +11,9 @@
 }
 
 .imgLeft {
-    height: 100svh; /* Permet de prendre toute la propriété  */
-    object-fit:cover;
+    height: 100vh;
+    object-fit: cover;
     background-color: red;
-
 }
 
 .form {
@@ -24,13 +23,14 @@
     font-family: 'Overpass', sans-serif;
     flex-direction: column;
     align-items: center;
-    background-color:white;
+    background-color: white;
 }
 
 .form label {
     padding: 10px;
 }
-.form input{
+
+.form input {
     font-size: 20px;
     padding: 10px;
     margin: 10px;
@@ -71,16 +71,22 @@
     color: black;
 }
 
-.linkConnexion :visited{
+.linkConnexion:visited {
     color: black;
 }
 
 .linkInscription {
     margin-bottom: 50px;
     text-decoration: dashed;
-    color:#03989E;
+    color: #03989E;
 }
 
-.linkInscription :visited{
+.linkInscription:visited {
     color: #03989E;
+}
+
+@media (max-width: 767px) {
+    .imgLeft {
+        display: none;
+    }
 }

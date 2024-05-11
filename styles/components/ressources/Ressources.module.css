@@ -6,27 +6,23 @@
 }
 
 .ressources {
-    max-width: 800px;
+    max-width: 90%;
     margin: 0 auto;
     margin-bottom: 10px;
     list-style-type: none;
-    /* Supprimer les points de puce de liste */
 }
 
 .card {
-    width: 800px;
-    /* Largeur de votre carte */
+    width: 90%;
+    max-width: 800px;
     margin: 20px auto;
-    /* Marge auto pour centrer horizontalement */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    /* Afficher en colonne */
     align-items: center;
-    /* Centrer verticalement */
 }
 
 .avatarContainer {
@@ -36,8 +32,8 @@
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
+    width: 20%;
+    height: auto;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 10px;
@@ -45,10 +41,8 @@
 
 .content {
     flex: 1;
-    /* Utilise tout l'espace restant */
     display: flex;
     flex-direction: column;
-    /* Afficher les éléments en colonnes */
     align-items: center;
 }
 
@@ -65,16 +59,14 @@
 
 .discover {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 2vw;
     color: #03989E;
-    /* Ajout de la couleur bleue */
     margin-top: 10px;
     display: block;
 }
 
 .discover:hover {
     text-decoration: underline;
-    /* Souligner au survol */
 }
 
 .interraction {
@@ -84,5 +76,23 @@
 }
 
 .interraction li {
-    margin: 10px;
+    margin: 1vw;
+}
+
+@media (min-width: 768px) {
+    .card {
+        width: 800px;
+    }
+
+    .avatar {
+        width: 100px;
+    }
+
+    .discover {
+        font-size: 20px;
+    }
+
+    .interraction li {
+        margin: 10px;
+    }
 }
