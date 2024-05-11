@@ -1,0 +1,12 @@
+.wrapper {
+    width: 280px;
+    margin: 0 auto;
+    background-color: #fcfcfc;
+    padding: 20px 50px 40px;
+    box-shadow: 1px 4px 10px 1px #aaa;
+    font-family: sans-serif;
+}
+
+.wrapper * {
+    box-sizing: border-box;
+}
