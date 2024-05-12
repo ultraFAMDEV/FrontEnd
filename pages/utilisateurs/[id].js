@@ -1,4 +1,6 @@
 import React from 'react'
+import {useRouter} from "next/router";
+import Link from 'next/link'
 import styles from "@/styles/components/Utilisateur.module.css";
 import Image from 'next/image'
 import Ressources from '@/components/ressources/ressources';
@@ -25,6 +27,7 @@ export default function Page({
                                ressources
 })
 {
+  const router = useRouter();
   return (
       <div className={styles.container}>
         <NavbarComponent />
@@ -56,6 +59,8 @@ export default function Page({
             <h3>
               {user.utilisateur_nom} {user.utilisateur_prenom}
             </h3>
+
+            <Link href={"/update-profile?id=" + router.id}> Mise à jour du profil</Link>
 
             {
               Boolean(user.t_profil)
