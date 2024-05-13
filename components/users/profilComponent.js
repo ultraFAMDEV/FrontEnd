@@ -110,7 +110,10 @@ export default function ProfilComponent() {
           <p>{error}</p>
         ) : user ? (
           <>
-            <img src="/boy.png" className={style.avatar} />
+            <img
+              src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${user.t_profil.profil_photo}`}
+              className={style.avatar}
+            />
             <p className={style.name}>
               {user.utilisateur_prenom} {""}
               {user.utilisateur_nom}

@@ -47,7 +47,10 @@ export default function AllRessourcesComponents() {
           <ul key={index} className={style.ressources}>
             <div className={style.card}>
               <div className={style.avatarContainer}>
-                <img src="/boy.png" className={style.avatar} />
+                <img
+                  src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.t_utilisateur.t_profil.profil_photo}`}
+                  className={style.avatar}
+                />
                 <div>
                   <li>
                     {ressource.t_utilisateur.utilisateur_prenom} <span> </span>
