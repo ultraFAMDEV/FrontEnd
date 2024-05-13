@@ -88,6 +88,11 @@
     margin: 2px;
 }
 
+.commentaireDate{
+    font-style: italic;
+    font-size: 10px;
+}
+
 .modifierRessource{
     background: #155de2;
     color: white;

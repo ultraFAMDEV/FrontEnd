@@ -361,8 +361,8 @@ export default function Ressource() {
                       </strong>
                       : {commentaire.commentaire_texte}
                     </p>
-                    <p>
-                      Il y a{" "}
+                    <p className={style.commentaireDate}>
+                      Il y a
                       {calculateElapsedTime(
                         commentaire.commentaire_date_publication
                       )}{" "}
