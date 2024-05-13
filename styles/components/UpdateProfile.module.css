@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px 50px 40px;
+    width: 80%;
+    margin: auto;
     /*box-shadow: 1px 4px 10px 1px #aaa;*/
     font-family: sans-serif;
 }
@@ -19,6 +21,10 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.titre {
+    margin: auto;
 }
 
 /* Style the submit button */
