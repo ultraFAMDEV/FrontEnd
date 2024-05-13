@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import style from "@/styles/components/ressources/Ressource.module.css";
 import NavbarComponent from "@/components/navbarComponent";
 import NouveauCommentaireForm from "@/components/ressources/newCommentaireComponent";
+import jwt from "jsonwebtoken"; // Importer jwt pour décoder le token
 
 export default function Ressource() {
   const formatDate = (dateString) => {
@@ -25,6 +26,12 @@ export default function Ressource() {
 
   const [ressource, setRessource] = useState(null);
   const [commentaires, setCommentaires] = useState([]);
+  const [editableMode, setEditableMode] = useState(false);
+  const [editableTitle, setEditableTitle] = useState("");
+  const [editableContent, setEditableContent] = useState("");
+  const [originalTitle, setOriginalTitle] = useState("");
+  const [originalContent, setOriginalContent] = useState("");
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     const fetchRessource = async () => {
@@ -41,6 +48,22 @@ export default function Ressource() {
         if (response.ok) {
           const data = await response.json();
           setRessource(data);
+          setEditableTitle(data.ressource_titre);
+          setEditableContent(data.ressource_contenu);
+          // Sauvegarder les valeurs originales
+          setOriginalTitle(data.ressource_titre);
+          setOriginalContent(data.ressource_contenu);
+
+          // Décoder le token et extraire l'ID de l'utilisateur
+          const token = localStorage.getItem("token");
+          if (token) {
+            const decodedToken = jwt.decode(token);
+            if (decodedToken) {
+              const userId = decodedToken.id;
+              console.log("ID de l'utilisateur:", userId);
+              setUserId(userId);
+            }
+          }
         } else {
           console.error("Échec lors de la récupération de la ressource");
         }
@@ -133,6 +156,68 @@ export default function Ressource() {
     }
   };
 
+  const handleTitleChange = (e) => {
+    setEditableTitle(e.target.value);
+  };
+
+  const handleContentChange = (e) => {
+    setEditableContent(e.target.value);
+  };
+
+  const handleUpdateRessource = async () => {
+    try {
+      const response = await fetch(
+        `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ressource_titre: editableTitle,
+            ressource_contenu: editableContent,
+          }),
+        }
+      );
+      if (response.ok) {
+        const updatedRessource = await response.json();
+        setRessource(updatedRessource);
+        setEditableMode(false);
+      } else {
+        console.error("Échec lors de la mise à jour de la ressource");
+      }
+    } catch (error) {
+      console.error("Échec lors de la mise à jour de la ressource:", error);
+    }
+  };
+
+  const handleEditClick = () => {
+    if (!userId) {
+      console.log("Vous devez être connecté pour modifier cette ressource.");
+      return;
+    }
+
+    if (!ressource) {
+      console.log("La ressource n'existe pas.");
+      return;
+    }
+
+    if (userId === ressource.t_utilisateur.utilisateur_id) {
+      setEditableMode(true);
+      setEditableTitle(ressource.ressource_titre);
+      setEditableContent(ressource.ressource_contenu);
+    } else {
+      console.log("Vous n'êtes pas autorisé à modifier cette ressource.");
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditableMode(false);
+    // Rétablir les valeurs originales
+    setEditableTitle(originalTitle);
+    setEditableContent(originalContent);
+  };
+
   return (
     <>
       <Head>
@@ -154,68 +239,98 @@ export default function Ressource() {
                 {ressource.t_utilisateur.utilisateur_prenom} <span> </span>
                 {ressource.t_utilisateur.utilisateur_nom}
                 <li className={style.ressourceDate}>
-                  Posté le {formatDate(ressource.ressource_date)}
+                  Posté le {formatDate(ressource.ressource_date)} <br></br>
+                  Modifier le
+                  {formatDate(ressource.ressource_date_modification)}
                 </li>
               </li>
             </div>
-            <h1 className={style.ressourceTitle}>
-              {ressource.ressource_titre}
-            </h1>
-            <img
-              className={style.imgRessource}
-              src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
-              alt="Ressource Media"
-            />
-            <div className={style.ressource_contenu}>
-              {ressource.ressource_contenu}
-            </div>
-            <div className={style.interraction}>
-              <span className="material-symbols-outlined">visibility</span>
-              {ressource.ressource_nombre_de_vues}
-              <span className="material-symbols-outlined">favorite</span>
-              {ressource.nbLikes}
-              <span className="material-symbols-outlined">chat</span>
-              {ressource.nbCommentaire}
-            </div>
-            <div className={style.detailRessource}>
-              <li>Visibilité : {ressource.ressource_visibilite}</li>
-              <li>Catégorie : {ressource.t_categories.nom_categorie}</li>
-            </div>
-            <h2>Commentaires :</h2>
-            {commentaires.map((commentaire) => (
-              <div
-                key={commentaire.commentaire_id}
-                className={style.commentaire}
-              >
-                <p>
-                  <strong>
-                    <img
-                      src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${commentaire.t_utilisateur.t_profil.profil_photo}`}
-                      className={style.avatarCommentaire}
-                    />
-                    {commentaire.t_utilisateur.utilisateur_prenom}{" "}
-                    {commentaire.t_utilisateur.utilisateur_nom}{" "}
-                  </strong>
-                  : {commentaire.commentaire_texte}
-                </p>
-                <p>
-                  Il y a{" "}
-                  {calculateElapsedTime(
-                    commentaire.commentaire_date_publication
-                  )}{" "}
-                  jour
-                  {calculateElapsedTime(
-                    commentaire.commentaire_date_publication
-                  ) > 1
-                    ? "s"
-                    : ""}
-                </p>
-              </div>
-            ))}
-            <NouveauCommentaireForm
-              onSubmit={handleSubmit}
-              resourceId={parseInt(id)}
-            />
+            {editableMode ? (
+              <>
+                <input
+                  type="text"
+                  value={editableTitle}
+                  onChange={handleTitleChange}
+                />
+                <textarea
+                  value={editableContent}
+                  onChange={handleContentChange}
+                ></textarea>
+                {/* Boutons pour enregistrer ou annuler les modifications */}
+                <button onClick={handleUpdateRessource}>Enregistrer</button>
+                <button onClick={handleCancelEdit}>Annuler</button>
+              </>
+            ) : (
+              <>
+                {/* Bouton pour activer le mode édition */}
+                {userId === ressource.t_utilisateur.utilisateur_id && (
+                  <button
+                    onClick={handleEditClick}
+                    className={style.modifierRessource}
+                  >
+                    Modifier
+                  </button>
+                )}
+                <h1 className={style.ressourceTitle}>
+                  {ressource.ressource_titre}
+                </h1>
+                <img
+                  className={style.imgRessource}
+                  src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
+                  alt="Ressource Media"
+                />
+                <div className={style.ressource_contenu}>
+                  {ressource.ressource_contenu}
+                </div>
+                <div className={style.interraction}>
+                  <span className="material-symbols-outlined">visibility</span>
+                  {ressource.ressource_nombre_de_vues}
+                  <span className="material-symbols-outlined">favorite</span>
+                  {ressource.nbLikes}
+                  <span className="material-symbols-outlined">chat</span>
+                  {ressource.nbCommentaire}
+                </div>
+                <div className={style.detailRessource}>
+                  <li>Visibilité : {ressource.ressource_visibilite}</li>
+                  <li>Catégorie : {ressource.t_categories.nom_categorie}</li>
+                </div>
+                <h2>Commentaires :</h2>
+                {commentaires.map((commentaire) => (
+                  <div
+                    key={commentaire.commentaire_id}
+                    className={style.commentaire}
+                  >
+                    <p>
+                      <strong>
+                        <img
+                          src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${commentaire.t_utilisateur.t_profil.profil_photo}`}
+                          className={style.avatarCommentaire}
+                        />
+                        {commentaire.t_utilisateur.utilisateur_prenom}{" "}
+                        {commentaire.t_utilisateur.utilisateur_nom}{" "}
+                      </strong>
+                      : {commentaire.commentaire_texte}
+                    </p>
+                    <p>
+                      Il y a{" "}
+                      {calculateElapsedTime(
+                        commentaire.commentaire_date_publication
+                      )}{" "}
+                      jour
+                      {calculateElapsedTime(
+                        commentaire.commentaire_date_publication
+                      ) > 1
+                        ? "s"
+                        : ""}
+                    </p>
+                  </div>
+                ))}
+                <NouveauCommentaireForm
+                  onSubmit={handleSubmit}
+                  resourceId={parseInt(id)}
+                />
+              </>
+            )}
           </ul>
         )}
       </div>
