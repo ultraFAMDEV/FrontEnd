@@ -42,29 +42,30 @@ export default function UpdateProfileForm({
 	return (
 		<div className={styles.wrapper}>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="nom">Nom</label>
-				<input type="text" id="nom" name="nom" required value={nom}/>
 
-				<label htmlFor="prenom"> prenom </label>
-				<input type="text" id="prenom" name="prenom" required value={prenom}/>
+				<label htmlFor="nom">Nom</label>
+				<input type="text" id="nom" name="nom" required value={nom} className={styles.input}/>
+
+				<label htmlFor="prenom">prenom</label>
+				<input type="text" id="prenom" name="prenom" required value={prenom} className={styles.input}/>
 
 				<label htmlFor="datenaissance">datenaissance</label>
-				<input type="text" id="datenaissance" name="datenaissance" required value={dateNaissance}/>
+				<input type="text" id="datenaissance" name="datenaissance" required value={dateNaissance} className={styles.input}/>
 
 				<label htmlFor="ville">ville</label>
-				<input type="text" id="ville" name="ville" required value={ville}/>
+				<input type="text" id="ville" name="ville" required value={ville} className={styles.input}/>
 
 				<label htmlFor="codepostal">codepostal</label>
-				<input type="text" id="codepostal" name="codepostal" required value={codePostal}/>
+				<input type="text" id="codepostal" name="codepostal" required value={codePostal} className={styles.input}/>
 
 				<label htmlFor="numerorue">numerorue</label>
-				<input type="text" id="numerorue" name="numerorue" required value={numRue}/>
+				<input type="text" id="numerorue" name="numerorue" required value={numRue} className={styles.input}/>
 
 				<label htmlFor="rue">rue</label>
-				<input type="text" id="rue" name="rue" required value={rue}/>
+				<input type="text" id="rue" name="rue" required value={rue} className={styles.input}/>
 
 				<label htmlFor="pays ">pays</label>
-				<input type="text" id="pays " name="pays " required value={pays}/>
+				<input type="text" id="pays " name="pays " required value={pays} className={styles.input}/>
 
 				<button type="submit">
 					Metre à jour
