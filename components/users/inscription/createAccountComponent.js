@@ -12,6 +12,8 @@ export default function InscriptionPage() {
     confirmPassword: "",
     civility: "homme",
     birthdate: "",
+    username: "",
+    function: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -36,20 +38,22 @@ export default function InscriptionPage() {
       try {
         console.log("Data being sent to API:", userData);
 
+        const formData = new FormData();
+        formData.append("email", userData.email);
+        formData.append("password", userData.password);
+        formData.append("nom", userData.username);
+        formData.append("prenom", userData.function);
+        formData.append("datenaissance", userData.birthdate);
+
         const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/endpoints/users",
+          "https://famdev.srvkoikarpfess.ddns.net/api/v1/users",
           {
             method: "POST",
+            body: formData,
             headers: {
-              "Content-Type": "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwibWFpbCI6ImFwcG9sbG9AZ21haWwuY29tIiwiaWRfdXNlciI6MywiaWF0IjoxNzE1NTgzMzcyLCJleHAiOjE3NDcxMTkzNzJ9.KZm90nqrqESMEPqK8qHRKeSpBkudRv2qedfwQX8V4d4",
             },
-            body: JSON.stringify({
-              email: userData.email,
-              password: userData.password,
-              nom: userData.username,
-              prenom: userData.function,
-              datenaissance: userData.birthdate,
-            }),
           }
         );
 

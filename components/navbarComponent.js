@@ -6,6 +6,7 @@ import style from "@/styles/components/Navbar.module.css";
 
 export default function NavbarComponent() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // État du menu burger
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +28,18 @@ export default function NavbarComponent() {
   return (
     <>
       <nav>
-        <ul className={style.navbar}>
+        {/* Burger menu pour les petits écrans */}
+        <div
+          className={`${style.burgerMenu} ${menuOpen ? style.active : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <div className={style.bar}></div>
+          <div className={style.bar}></div>
+          <div className={style.bar}></div>
+        </div>
+
+        {/* Menu normal pour les grands écrans */}
+        <ul className={`${style.navbar} ${menuOpen ? style.active : ""}`}>
           {loggedIn ? (
             <>
               <li>
@@ -43,6 +55,11 @@ export default function NavbarComponent() {
               <li>
                 <div>
                   <Link href="/profil">Profil</Link>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Link href="/ressources/newressource">Poster</Link>
                 </div>
               </li>
               <li>

@@ -1,0 +1,98 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ressources {
+    max-width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.card {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatarContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 20%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ressourceTitle {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.ressourceMedia {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.discover {
+    text-decoration: none;
+    font-size: 2vw;
+    color: #03989E;
+    margin-top: 10px;
+    display: block;
+}
+
+.discover:hover {
+    text-decoration: underline;
+}
+
+.interraction {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.interraction li {
+    margin: 1vw;
+}
+
+@media (min-width: 768px) {
+    .card {
+        width: 800px;
+    }
+
+    .avatar {
+        width: 100px;
+    }
+
+    .discover {
+        font-size: 20px;
+    }
+
+    .interraction li {
+        margin: 10px;
+    }
+}

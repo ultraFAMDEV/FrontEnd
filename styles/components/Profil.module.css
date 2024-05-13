@@ -4,10 +4,13 @@
     flex-direction: column;
     align-items: center;
     border-bottom: 1px solid black;
+    padding: 20px;
 }
+
 .container p {
     margin: 5px;
 }
+
 .avatar {
     object-fit: cover;
     width: 10%;
@@ -16,11 +19,57 @@
     margin: 2px;
 }
 
-.name{
+.name {
     font-size: 30px;
     text-transform: uppercase;
 }
 
 .description {
     font-weight: bold;
+}
+
+.ressourcesByUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.oneRessource {
+    width: 90%;
+    max-width: 800px;
+    margin: 5px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interraction{
+    margin: 2Opx;
+
+}
+.interraction span{
+    margin: 7px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .avatar {
+        width: 50px;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
 }

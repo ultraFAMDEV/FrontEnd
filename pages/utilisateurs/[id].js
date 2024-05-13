@@ -26,7 +26,7 @@ export async function  getServerSideProps({ query }) {
       ressources,
       user_id
     },
-  }
+  };
 }
 
 export default function Page({
@@ -62,35 +62,33 @@ export default function Page({
             />
           </div>
 
-          <div className={styles.bio}>
-            <h3>
-              {user.utilisateur_nom} {user.utilisateur_prenom}
-            </h3>
+        <div className={styles.bio}>
+          <h3>
+            {user.utilisateur_nom} {user.utilisateur_prenom}
+          </h3>
 
+          {Boolean(user.t_profil) ? (
+            <p>user.t_profil.profil_description</p>
+          ) : (
+            <p>Pas encore de description</p>
+          )}
             <Link href={"/update-profile?id=" + user_id}> Mise à jour du profil</Link>
 
-            {
-              Boolean(user.t_profil)
-                ? <p>{user.t_profil.profil_description}</p>
-                : <p>Pas encore de description</p>
-            }
+          {Boolean(user.utilisateur_datenaissance) && (
+            <div>
+              <span> née le {user.utilisateur_datenaissance}</span>
+              <br />
+              <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
+            </div>
+          )}
+					{
+						ressources.ressources.length !== 0
+							? <Ressources ressources={ressources}/>
+							: <p>{user.utilisateur_prenom} n a pas encore publier de ressource</p>
+					}
 
-            {
-              Boolean(user.utilisateur_datenaissance) &&
-              <div>
-                <span> née le {user.utilisateur_datenaissance}</span>
-                <br/>
-                <span> Inscrit depuis {user.utilisateur_dateinscription}</span>
-              </div>
-            }
-            {
-              ressources.ressources.length !== 0
-                ? <Ressources ressources={ressources}/>
-                : <p>{user.utilisateur_prenom} n a pas encore publier de ressource</p>
-            }
-
-          </div>
-        </div>
+				</div>
       </div>
+    </div>
   );
 }
