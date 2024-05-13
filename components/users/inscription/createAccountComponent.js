@@ -12,8 +12,8 @@ export default function InscriptionPage() {
     confirmPassword: "",
     civility: "homme",
     birthdate: "",
-    username: "", // Ajout de cette ligne pour initialiser le champ "username"
-    function: "", // Ajout de cette ligne pour initialiser le champ "function"
+    username: "",
+    function: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -50,6 +50,10 @@ export default function InscriptionPage() {
           {
             method: "POST",
             body: formData,
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwibWFpbCI6ImFwcG9sbG9AZ21haWwuY29tIiwiaWRfdXNlciI6MywiaWF0IjoxNzE1NTgzMzcyLCJleHAiOjE3NDcxMTkzNzJ9.KZm90nqrqESMEPqK8qHRKeSpBkudRv2qedfwQX8V4d4",
+            },
           }
         );
 

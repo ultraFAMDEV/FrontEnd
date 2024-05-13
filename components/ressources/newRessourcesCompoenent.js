@@ -5,8 +5,8 @@ import style from "@/styles/components/ressources/NewRessource.module.css";
 
 export default function NewRessource() {
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
+    titre: "",
+    contenu: "",
     media: null,
     categorie: "",
   });
@@ -40,6 +40,7 @@ export default function NewRessource() {
 
     fetchCategories();
   }, []);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -63,12 +64,11 @@ export default function NewRessource() {
 
       const formDataToSend = new FormData();
 
-      formDataToSend.append("title", formData.title);
-      formDataToSend.append("description", formData.description);
-      formDataToSend.append("categorie", formData.categorie); // Utilisation de la catégorie sélectionnée
+      formDataToSend.append("titre", formData.titre);
+      formDataToSend.append("contenu", formData.contenu);
+      formDataToSend.append("categorieName", formData.categorie);
       formDataToSend.append("visibilite", "publique");
-      formDataToSend.append("status_id", "1");
-      formDataToSend.append("id_commentaire", "1");
+      formDataToSend.append("userid", token);
 
       if (formData.media) {
         formDataToSend.append("media", formData.media);
@@ -107,26 +107,26 @@ export default function NewRessource() {
         <form className={style.form} onSubmit={handleSubmit}>
           {error && <p className={style.error}>{error}</p>}
           <div className={style.formGroup}>
-            <label htmlFor="title" className={style.label}>
+            <label htmlFor="titre" className={style.label}>
               Titre :
             </label>
             <input
               type="text"
-              id="title"
-              name="title"
-              value={formData.title}
+              id="titre"
+              name="titre"
+              value={formData.titre}
               onChange={handleChange}
               className={style.input}
             />
           </div>
           <div className={style.formGroup}>
-            <label htmlFor="description" className={style.label}>
-              Description :
+            <label htmlFor="contenu" className={style.label}>
+              Contenu :
             </label>
             <textarea
-              id="description"
-              name="description"
-              value={formData.description}
+              id="contenu"
+              name="contenu"
+              value={formData.contenu}
               onChange={handleChange}
               className={style.textarea}
             />

@@ -83,7 +83,7 @@ export default function Categories() {
       <div className={style.categoriesContainer}>
         <input
           type="text"
-          placeholder="Rechercher par titre"
+          placeholder="Chercher une ressource"
           value={searchValue}
           onChange={handleSearchChange}
           className={style.searchInput}
@@ -101,8 +101,9 @@ export default function Categories() {
             {categories.map((category, index) => (
               <div key={index} className={style.categoryCard}>
                 <p className={style.nomRessource}>{category.nom_categorie}</p>
-                <p className={style.nbRessources}>{category.nbRessources}</p>
-                {/* Afficher les ressources sous la catégorie */}
+                <p className={style.nbRessources}>
+                  {category.nbRessources} ressources
+                </p>
                 <div className={style.resources}>
                   {category.ressources &&
                     category.ressources.map((resource, index) => (

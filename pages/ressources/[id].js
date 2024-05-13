@@ -142,7 +142,10 @@ export default function Ressource() {
               </div>
             ))}
 
-            <NouveauCommentaireForm onSubmit={handleSubmit} resourceId={id} />
+            <NouveauCommentaireForm
+              onSubmit={handleSubmit}
+              resourceId={parseInt(id)}
+            />
           </ul>
         )}
       </div>

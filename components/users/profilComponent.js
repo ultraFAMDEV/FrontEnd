@@ -100,6 +100,10 @@ export default function ProfilComponent() {
             (RE)ssource - {user.utilisateur_prenom} {user.utilisateur_nom}
           </title>
         )}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
       </Head>
       <div className={style.container}>
         {error ? (
@@ -121,21 +125,29 @@ export default function ProfilComponent() {
             <p>
               Inscrit depuis le {formatDate(user.utilisateur_dateinscription)}
             </p>
-            <h2>Ressources de l'utilisateur :</h2>
-            {ressources.map(
-              (ressource) =>
-                // Vérifier si l'ID de l'utilisateur de la ressource correspond à l'ID de l'utilisateur connecté
-                ressource.id_utilisateur === userId && (
-                  <div key={ressource.ressource_id}>
-                    <Link href={`/ressources/${ressource.ressource_id}`}>
-                      {ressource.ressource_titre}
-                    </Link>
-                  </div>
-                )
-            )}
           </>
         ) : (
           <p>Chargement des informations de l'utilisateur...</p>
+        )}
+      </div>
+      <div className={style.ressourcesByUser}>
+        {ressources.map(
+          (ressource) =>
+            ressource.id_utilisateur === userId && (
+              <div className={style.oneRessource} key={ressource.ressource_id}>
+                <Link href={`/ressources/${ressource.ressource_id}`}>
+                  {ressource.ressource_titre}
+                </Link>
+                <div className={style.interraction}>
+                  <span class="material-symbols-outlined">visibility</span>
+                  {ressource.ressource_nombre_de_vues}
+                  <span className="material-symbols-outlined">favorite</span>
+                  {ressource.nbLikes}
+                  <span className="material-symbols-outlined">chat</span>
+                  {ressource.nbCommentaire}
+                </div>
+              </div>
+            )
         )}
       </div>
     </>

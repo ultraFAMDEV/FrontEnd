@@ -72,6 +72,10 @@ export default function AllRessourcesComponents() {
                   </Link>
                   <div className={style.interraction}>
                     <li>
+                      <span class="material-symbols-outlined">visibility</span>
+                      {ressource.ressource_nombre_de_vues}
+                    </li>
+                    <li>
                       <span className="material-symbols-outlined">
                         favorite
                       </span>
