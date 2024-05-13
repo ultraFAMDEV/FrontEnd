@@ -39,6 +39,9 @@ export default function ComponentConnexion() {
         // Stockage du token dans le localStorage
         localStorage.setItem("token", data.token);
         setToken(data.token);
+
+        document.cookie = 'userId='+ data.user +'; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+
         router.push("/");
       } else {
         setError(data.error);
