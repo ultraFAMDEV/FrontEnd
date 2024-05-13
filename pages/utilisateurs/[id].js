@@ -1,5 +1,4 @@
 import React from 'react'
-import {useRouter} from "next/router";
 import Link from 'next/link'
 import styles from "@/styles/components/Utilisateur.module.css";
 import Image from 'next/image'
@@ -7,27 +6,35 @@ import Ressources from '@/components/ressources/ressources';
 import NavbarComponent from "@/components/navbarComponent";
 
 export async function  getServerSideProps({ query }) {
-  const endpoint = process.env.API_ENDPOINT + 'users?id=' + query.id;
-  const res = await fetch(endpoint);
+  const user_id = query.id;
+  const endpoint = process.env.API_ENDPOINT + 'users?id=' + user_id;
+  const res = await fetch(endpoint, {
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem("token"),
+      'X-Custom-Header': 'header value'
+    }
+  });
   const user = await res.json()
 
-  const res2 = await fetch(process.env.API_ENDPOINT + 'ressources?user_id=' + query.id );
+  const res2 = await fetch(process.env.API_ENDPOINT + 'ressources?user_id=' + user_id );
   const ressources = await res2.json();
 
   return {
     props: {
       user,
-      ressources
+      ressources,
+      user_id
     },
   }
 }
 
 export default function Page({
                                user,
-                               ressources
+                               ressources,
+                                user_id
 })
 {
-  const router = useRouter();
   return (
       <div className={styles.container}>
         <NavbarComponent />
@@ -60,7 +67,7 @@ export default function Page({
               {user.utilisateur_nom} {user.utilisateur_prenom}
             </h3>
 
-            <Link href={"/update-profile?id=" + router.id}> Mise à jour du profil</Link>
+            <Link href={"/update-profile?id=" + user_id}> Mise à jour du profil</Link>
 
             {
               Boolean(user.t_profil)
