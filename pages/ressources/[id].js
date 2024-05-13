@@ -211,6 +211,28 @@ export default function Ressource() {
     }
   };
 
+  const handleDeleteClick = async () => {
+    try {
+      const response = await fetch(
+        `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        // Rediriger vers la page d'accueil ou une autre page
+        router.push("/");
+      } else {
+        console.error("Échec lors de la suppression de la ressource");
+      }
+    } catch (error) {
+      console.error("Échec lors de la suppression de la ressource:", error);
+    }
+  };
+
   const handleCancelEdit = () => {
     setEditableMode(false);
     // Rétablir les valeurs originales
@@ -288,6 +310,15 @@ export default function Ressource() {
                     className={style.modifierRessource}
                   >
                     Modifier
+                  </button>
+                )}
+                {/* Bouton pour supprimer la ressource */}
+                {userId === ressource.t_utilisateur.utilisateur_id && (
+                  <button
+                    onClick={handleDeleteClick}
+                    className={style.supprimerRessource}
+                  >
+                    Supprimer
                   </button>
                 )}
                 <h1 className={style.ressourceTitle}>

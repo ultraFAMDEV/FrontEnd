@@ -104,6 +104,23 @@ color: #155de2;
 border: 1px solid #155de2;
 }
 
+.supprimerRessource{
+    background: #e21515;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 15px;
+    margin: 5px;
+}
+
+.supprimerRessource:hover {
+    background: white;
+    color: #e21515;
+    border: 1px solid #e21515;
+}
+
 .input {
     width: 100%;
     padding: 8px;
