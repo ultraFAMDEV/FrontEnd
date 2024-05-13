@@ -1,10 +1,14 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import styles from "@/styles/components/UpdateProfile.module.css";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function UpdateProfileForm({
 	user
 		 }){
+
+	useEffect(() => {
+		setToken(localStorage.getItem("token"))
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -24,7 +28,7 @@ export default function UpdateProfileForm({
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
-				"bearer": localStorage.getItem("token")
+				Authorization: "bearer" + token
 			},
 			body: JSON.stringify(data)
 		})
@@ -38,9 +42,11 @@ export default function UpdateProfileForm({
 	const [ville, setVille] = useState(user.ville)
 	const [pays, setPays] = useState(user.pays)
 	const [rue, setRue] = useState(user.rue)
+	const [token, setToken] = useState('')
 
 	return (
 		<div className={styles.wrapper}>
+			<h1 className={styles.titre}>Mon profil</h1>
 			<form onSubmit={handleSubmit}>
 
 				<label htmlFor="nom">Nom</label>
