@@ -240,8 +240,13 @@ export default function Ressource() {
                 {ressource.t_utilisateur.utilisateur_nom}
                 <li className={style.ressourceDate}>
                   Posté le {formatDate(ressource.ressource_date)} <br></br>
-                  Modifier le
-                  {formatDate(ressource.ressource_date_modification)}
+                  {new Date(ressource.ressource_date_modification) >
+                    new Date(ressource.ressource_date) && (
+                    <>
+                      Modifier le{" "}
+                      {formatDate(ressource.ressource_date_modification)}
+                    </>
+                  )}
                 </li>
               </li>
             </div>
@@ -251,14 +256,28 @@ export default function Ressource() {
                   type="text"
                   value={editableTitle}
                   onChange={handleTitleChange}
+                  className={style.input}
                 />
                 <textarea
                   value={editableContent}
                   onChange={handleContentChange}
+                  className={style.textarea}
                 ></textarea>
                 {/* Boutons pour enregistrer ou annuler les modifications */}
-                <button onClick={handleUpdateRessource}>Enregistrer</button>
-                <button onClick={handleCancelEdit}>Annuler</button>
+                <div className={style.buttonContainer}>
+                  <button
+                    onClick={handleUpdateRessource}
+                    className={style.saveButton}
+                  >
+                    Enregistrer
+                  </button>
+                  <button
+                    onClick={handleCancelEdit}
+                    className={style.cancelButton}
+                  >
+                    Annuler
+                  </button>
+                </div>
               </>
             ) : (
               <>
