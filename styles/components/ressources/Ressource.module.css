@@ -1,23 +1,22 @@
 .container {
     width: 90%;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: flex;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* Afficher les éléments en colonne sur les petits écrans */
 }
 
-.ressource_contenu{
-    text-align: justify;
-}
-
+/* Ajout de règles pour rendre le contenu responsive */
 .avatarName {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    /* Afficher les noms en dessous des avatars */
     align-items: center;
-    justify-content: center;
     margin-bottom: 10px;
 }
 
@@ -30,14 +29,15 @@
 
 .avatarName li {
     list-style: none;
+    margin-top: 5px;
+    /* Espacement entre l'image et le nom */
 }
 
 .imgRessource {
-    width: 80%;
-    max-width: 300px;
+    width: 100%;
+    /* La largeur prend 100% de la largeur de son conteneur */
+    max-width: 400px;
     margin-bottom: 10px;
-    display: flex;
-    align-items: center;
 }
 
 .interraction {
@@ -58,7 +58,8 @@
 .detailRessource {
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: flex-end;
+    /* Aligner les détails à droite sur les petits écrans */
 }
 
 .detailRessource li {
@@ -66,114 +67,44 @@
     margin: 3px;
 }
 
-.ressourceDate{
+.ressourceDate {
     font-style: italic;
     font-size: 10px;
 }
 
-.ressourceTitle{
+.ressourceTitle {
     text-transform: uppercase;
     text-align: center;
 }
 
-.commentaire{
+.commentaire {
     display: flex;
     flex-direction: column;
 }
 
-.avatarCommentaire{
+.avatarCommentaire {
     object-fit: cover;
     height: 50px;
     border-radius: 100%;
     margin: 2px;
 }
 
-.commentaireDate{
+.commentaireDate {
     font-style: italic;
     font-size: 10px;
 }
 
-.modifierRessource{
-    background: #155de2;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 15px;
-}
-
-.modifierRessource:hover {
-background: white;
-color: #155de2;
-border: 1px solid #155de2;
-}
-
-.supprimerRessource{
-    background: #e21515;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 15px;
-    margin: 5px;
-}
-
-.supprimerRessource:hover {
-    background: white;
-    color: #e21515;
-    border: 1px solid #e21515;
-}
-
-.input {
+.modifierRessource,
+.supprimerRessource {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: space-between;
-}
-
-.saveButton {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.saveButton:hover {
-    background-color: #45a049;
-}
-
-.cancelButton {
-    background-color: #f44336;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.cancelButton:hover {
-    background-color: #d32f2f;
+    margin-bottom: 5px;
 }
 
 @media (min-width: 768px) {
+
+    .container {
+        flex-direction: row;
+    }
 
     .avatarName img {
         max-width: 150px;
@@ -185,6 +116,5 @@ border: 1px solid #155de2;
 
     .imgRessource {
         max-width: 400px;
-        display: flex;
     }
 }

@@ -59,3 +59,26 @@
     color: red;
     margin-bottom: 1rem;
 }
+
+@media (max-width: 768px) {
+
+    .form {
+        padding: 1rem;
+    }
+
+    .label {
+        font-size: 1rem;
+    }
+
+    .input,
+    .textarea,
+    .fileInput {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    .button {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
