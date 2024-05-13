@@ -144,7 +144,10 @@ export default function NewRessource() {
             >
               <option value="">Sélectionner une catégorie</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option
+                  key={category.id_categorie}
+                  value={category.id_categorie}
+                >
                   {category.nom_categorie}
                 </option>
               ))}

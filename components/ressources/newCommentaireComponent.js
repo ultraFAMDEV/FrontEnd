@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import style from "@/styles/components/ressources/AjoutCommentaire.module.css";
 
 export default function NouveauCommentaireForm({ onSubmit, resourceId }) {
   const [nouveauCommentaire, setNouveauCommentaire] = useState("");
@@ -32,7 +33,9 @@ export default function NouveauCommentaireForm({ onSubmit, resourceId }) {
       );
 
       if (response.ok) {
+        // Actualiser les commentaires après l'ajout d'un nouveau commentaire
         onSubmit();
+        // Réinitialiser le champ de saisie du commentaire
         setNouveauCommentaire("");
       } else {
         console.error("Échec lors de l'ajout du commentaire");
@@ -47,10 +50,13 @@ export default function NouveauCommentaireForm({ onSubmit, resourceId }) {
       <textarea
         value={nouveauCommentaire}
         onChange={(e) => setNouveauCommentaire(e.target.value)}
-        placeholder="Ajouter un commentaire..."
+        placeholder="Ajouter un commentaire"
+        className={style.commentaire}
       ></textarea>{" "}
       <br></br>
-      <button type="submit">Envoyer</button>
+      <button type="submit" className={style.submitCommentaire}>
+        Envoyer
+      </button>
     </form>
   );
 }

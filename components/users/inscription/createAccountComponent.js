@@ -14,6 +14,7 @@ export default function InscriptionPage() {
     birthdate: "",
     username: "",
     function: "",
+    profilePhoto: null, // Ajout de l'état pour la photo de profil
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -44,6 +45,7 @@ export default function InscriptionPage() {
         formData.append("nom", userData.username);
         formData.append("prenom", userData.function);
         formData.append("datenaissance", userData.birthdate);
+        formData.append("profil_photo", userData.profilePhoto); // Ajout de la photo de profil
 
         const response = await fetch(
           "https://famdev.srvkoikarpfess.ddns.net/api/v1/users",
@@ -52,7 +54,7 @@ export default function InscriptionPage() {
             body: formData,
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwibWFpbCI6ImFwcG9sbG9AZ21haWwuY29tIiwiaWRfdXNlciI6MywiaWF0IjoxNzE1NTgzMzcyLCJleHAiOjE3NDcxMTkzNzJ9.KZm90nqrqESMEPqK8qHRKeSpBkudRv2qedfwQX8V4d4",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwibWFpbCI6ImphY3F1ZXNjaGlyYWNAbWFpbC5mciIsImlkX3VzZXIiOjIsImlhdCI6MTcxNTU5OTQyMCwiZXhwIjoxNzQ3MTM1NDIwfQ.smEg5cerqd95Es8qxpS_94feUZBV-h50uYhoE1vgtpM",
             },
           }
         );
@@ -79,11 +81,19 @@ export default function InscriptionPage() {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      [name]: value,
-    }));
+    const { name, value, files } = e.target;
+    // Si c'est un champ de fichier (photo de profil), utilise le premier fichier sélectionné
+    if (name === "profilePhoto") {
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        [name]: files[0], // Stocke le fichier dans l'état
+      }));
+    } else {
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        [name]: value,
+      }));
+    }
   };
 
   return (
@@ -187,10 +197,20 @@ export default function InscriptionPage() {
                   placeholder="Date de naissance"
                 />
               </label>
+              {/* Champ pour la photo de profil */}
+              <label>
+                Photo de profil
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="profilePhoto"
+                  onChange={handleInputChange}
+                />
+              </label>
             </>
           )}
-          {errorMessage && <p className={styles.error}>{errorMessage}</p>}{" "}
-          {successMessage && <p className={styles.success}>{successMessage}</p>}{" "}
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          {successMessage && <p className={styles.success}>{successMessage}</p>}
           <div className={styles.button} onClick={handleNext}>
             {step === 1 ? "Suivant" : "Créer mon profil"}
           </div>
