@@ -1,4 +1,5 @@
 import React from "react";
+import style from "@/styles/components/Navbar.module.css";
 
 export default function DeconnexionAccountComponent({
   onLogout,
@@ -9,5 +10,9 @@ export default function DeconnexionAccountComponent({
     redirectToHome();
   };
 
-  return <button onClick={handleLogout}>Déconnexion</button>;
+  return (
+    <button onClick={handleLogout} className={style.boutonDeconnexion}>
+      Déconnexion
+    </button>
+  );
 }

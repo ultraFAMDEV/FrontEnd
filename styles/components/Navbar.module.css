@@ -46,6 +46,22 @@
     border-bottom: 1px solid black;
 }
 
+.boutonDeconnexion{
+    background: #033e9e;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1rem;
+}
+
+.boutonDeconnexion:hover {
+    background: white;
+    color: #033e9e;
+    border: 1px solid #033e9e;
+}
+
 @media screen and (max-width: 768px) {
     .navbar {
         display: none;
