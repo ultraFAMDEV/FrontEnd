@@ -121,6 +121,7 @@ export default function ProfilComponent() {
             <p className={style.description}>
               {user.t_profil.profil_description}
             </p>
+            <Link href="/update-profile">Modifier le profil</Link>
             <p>
               Abonnements : {user.t_profil.profil_nbabonnement} Créations :{" "}
               {user.t_profil.profil_creations}
