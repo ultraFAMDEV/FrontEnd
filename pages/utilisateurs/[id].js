@@ -11,8 +11,7 @@ export async function  getServerSideProps({ query }) {
   const res = await fetch(endpoint, {
     headers: {
       Accept: 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem("token"),
-      'X-Custom-Header': 'header value'
+      Authorization: 'Bearer ' + localStorage.getItem("token")
     }
   });
   const user = await res.json()
