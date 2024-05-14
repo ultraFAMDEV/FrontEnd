@@ -1,22 +1,23 @@
-.commentaire{
-    margin-top: 30px;
-   border-radius: 5px;
-   width: 500px;
-   height:500;
+.commentaire {
+    margin-top: 2rem;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
 }
 
 .submitCommentaire {
     background: #03989E;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
     border-radius: 3px;
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 .submitCommentaire:hover {
-    background:white;
+    background: white;
     color: #03989E;
     border: 1px solid #03989E;
 }

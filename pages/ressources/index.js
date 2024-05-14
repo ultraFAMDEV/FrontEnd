@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import style from "@/styles/components/ressources/Recherche.module.css";
 import NavbarComponent from "@/components/navbarComponent";
+import Link from "next/link";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -99,20 +100,24 @@ export default function Categories() {
         ) : (
           <div>
             {categories.map((category, index) => (
-              <div key={index} className={style.categoryCard}>
-                <p className={style.nomRessource}>{category.nom_categorie}</p>
-                <p className={style.nbRessources}>
-                  {category.nbRessources} ressources
-                </p>
-                <div className={style.resources}>
-                  {category.ressources &&
-                    category.ressources.map((resource, index) => (
-                      <div key={index} className={style.resourceItem}>
-                        <p>{resource.titre}</p>
-                      </div>
-                    ))}
+              <Link href={`/ressources/categories/${category.id_categorie}`}>
+                <div key={index} className={style.categoryCard}>
+                  {/* Utilisez Link pour créer des liens dynamiques */}
+                  <a className={style.nomRessource}>{category.nom_categorie}</a>
+
+                  <p className={style.nbRessources}>
+                    {category.nbRessources} ressources
+                  </p>
+                  <div className={style.resources}>
+                    {category.ressources &&
+                      category.ressources.map((resource, index) => (
+                        <div key={index} className={style.resourceItem}>
+                          <p>{resource.titre}</p>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

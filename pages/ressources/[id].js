@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import style from "@/styles/components/ressources/Ressource.module.css";
 import NavbarComponent from "@/components/navbarComponent";
 import NouveauCommentaireForm from "@/components/ressources/newCommentaireComponent";
-import jwt from "jsonwebtoken"; // Importer jwt pour décoder le token
+import jwt from "jsonwebtoken";
 
 export default function Ressource() {
   const formatDate = (dateString) => {
