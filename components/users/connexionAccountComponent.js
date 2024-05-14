@@ -41,6 +41,7 @@ export default function ComponentConnexion() {
         setToken(data.token);
 
         document.cookie = 'userId='+ data.user +'; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+        document.cookie = 'token='+ data.token +'; expires=Fri, 31 Dec 9999 23:59:59 GMT';
 
         router.push("/");
       } else {
