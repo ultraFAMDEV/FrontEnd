@@ -1,4 +1,4 @@
-describe("Connexion Page", () => {
+describe("Inscription Page", () => {
   it("Chargement de la page avec succès", () => {
     cy.visit("http://localhost:3000/inscription");
 
