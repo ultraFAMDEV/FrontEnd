@@ -82,11 +82,10 @@ export default function InscriptionPage() {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    // Si c'est un champ de fichier (photo de profil), utilise le premier fichier sélectionné
     if (name === "profilePhoto") {
       setUserData((prevUserData) => ({
         ...prevUserData,
-        [name]: files[0], // Stocke le fichier dans l'état
+        [name]: files[0],
       }));
     } else {
       setUserData((prevUserData) => ({
