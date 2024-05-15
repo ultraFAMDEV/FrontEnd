@@ -20,14 +20,14 @@ describe("Connexion Page", () => {
 
     cy.get('input[placeholder="Nom"]').type("cedric");
     cy.get('input[placeholder="Prénom"]').type("ans");
-    //cy.get('input[type="date"]').type("01/01/2000");
-    //cy.get('input[type="file"]').type("ans");
+    cy.get('input[type="date"]').type("1999-12-31");
+    cy.get("input[type=file]").selectFile("public/boy.png");
 
     cy.get("div").contains("Créer mon profil").click();
     cy.url().should("eq", "http://localhost:3000/");
   });
 
-  it("Inscription avec un utilisateur valide", () => {
+  it("Inscription avec un mot de passe non valide valide", () => {
     cy.visit("http://localhost:3000/inscription");
 
     cy.get('input[placeholder="Adresse mail"]').type(
