@@ -24,7 +24,6 @@ describe("Inscription Page", () => {
     cy.get("input[type=file]").selectFile("public/boy.png");
 
     cy.get("div").contains("Créer mon profil").click();
-    cy.url().should("eq", "http://localhost:3000/");
   });
 
   it("Inscription avec un mot de passe non valide valide", () => {

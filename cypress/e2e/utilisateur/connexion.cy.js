@@ -1,4 +1,7 @@
 describe("Connexion Page", () => {
+  const mail = Cypress.env("USER_MAIL_ADDRESS");
+  const password = Cypress.env("USER_PASSWORD");
+
   it("Chargement de la page avec succès", () => {
     cy.visit("http://localhost:3000/connexion");
 
@@ -12,8 +15,8 @@ describe("Connexion Page", () => {
   it("Connexion avec un utilisateur valide", () => {
     cy.visit("http://localhost:3000/connexion");
 
-    cy.get('input[placeholder="Adresse mail"]').type("cedric@mail.fr");
-    cy.get('input[placeholder="Mot de passe"]').type("cedric");
+    cy.get('input[placeholder="Adresse mail"]').type(`${mail}`);
+    cy.get('input[placeholder="Mot de passe"]').type(`${password}`);
 
     cy.get("div").contains("Se connecter").click();
 
