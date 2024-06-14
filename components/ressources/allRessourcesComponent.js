@@ -5,19 +5,16 @@ import Link from "next/link";
 
 export default function AllRessourcesComponents() {
   const [ressources, setRessources] = useState([]);
-
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
   useEffect(() => {
     const fetchRessources = async () => {
       try {
-        const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${API_ENDPOINT}/ressources`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -48,7 +45,7 @@ export default function AllRessourcesComponents() {
             <div className={style.card}>
               <div className={style.avatarContainer}>
                 <img
-                  src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.t_utilisateur.t_profil.profil_photo}`}
+                  src={`${API_ENDPOINT}/images?image=${ressource.t_utilisateur.t_profil.profil_photo}`}
                   className={style.avatar}
                 />
                 <div>
@@ -64,7 +61,7 @@ export default function AllRessourcesComponents() {
               <div className={style.content}>
                 <img
                   className={style.ressourceMedia}
-                  src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
+                  src={`${API_ENDPOINT}/images?image=${ressource.ressource_media}`}
                 />
                 <div className={style.resourceActions}>
                   <Link

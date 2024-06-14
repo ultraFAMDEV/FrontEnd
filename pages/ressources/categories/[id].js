@@ -7,6 +7,7 @@ import NavbarComponent from "@/components/navbarComponent";
 export default function AllRessourcesComponents() {
   const [category, setCategory] = useState({});
   const [ressources, setRessources] = useState([]);
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   useEffect(() => {
     const categoryId = window.location.pathname.split("/").pop();
@@ -14,7 +15,7 @@ export default function AllRessourcesComponents() {
     const fetchCategoryAndRessources = async () => {
       try {
         const categoryResponse = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/v1/categorie?id=${categoryId}`,
+          `${API_ENDPOINT}/categorie?id=${categoryId}`,
           {
             method: "GET",
             headers: {

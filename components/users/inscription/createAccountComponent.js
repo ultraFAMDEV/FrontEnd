@@ -47,17 +47,14 @@ export default function InscriptionPage() {
         formData.append("datenaissance", userData.birthdate);
         formData.append("profil_photo", userData.profilePhoto); // Ajout de la photo de profil
 
-        const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/v1/users",
-          {
-            method: "POST",
-            body: formData,
-            headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwibWFpbCI6ImphY3F1ZXNjaGlyYWNAbWFpbC5mciIsImlkX3VzZXIiOjIsImlhdCI6MTcxNTU5OTQyMCwiZXhwIjoxNzQ3MTM1NDIwfQ.smEg5cerqd95Es8qxpS_94feUZBV-h50uYhoE1vgtpM",
-            },
-          }
-        );
+        const response = await fetch(`${API_ENDPOINT}/user`, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwibWFpbCI6ImphY3F1ZXNjaGlyYWNAbWFpbC5mciIsImlkX3VzZXIiOjIsImlhdCI6MTcxNTU5OTQyMCwiZXhwIjoxNzQ3MTM1NDIwfQ.smEg5cerqd95Es8qxpS_94feUZBV-h50uYhoE1vgtpM",
+          },
+        });
 
         const result = await response.json();
 

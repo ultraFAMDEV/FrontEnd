@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import style from "@/styles/components/ressources/NewRessource.module.css";
 
 export default function NewRessource() {
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
   const [formData, setFormData] = useState({
     titre: "",
     contenu: "",
@@ -17,15 +18,12 @@ export default function NewRessource() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/v1/categorie",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${API_ENDPOINT}/categorie`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -74,16 +72,13 @@ export default function NewRessource() {
         formDataToSend.append("media", formData.media);
       }
 
-      const response = await fetch(
-        "https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formDataToSend,
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/ressources`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formDataToSend,
+      });
 
       if (!response.ok) {
         throw new Error("Échec lors de la création de la ressource");
