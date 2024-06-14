@@ -5,6 +5,7 @@ import style from "@/styles/components/ressources/AjoutCommentaire.module.css";
 export default function NouveauCommentaireForm({ onSubmit, resourceId }) {
   const [nouveauCommentaire, setNouveauCommentaire] = useState("");
   const router = useRouter();
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,20 +18,17 @@ export default function NouveauCommentaireForm({ onSubmit, resourceId }) {
         return;
       }
 
-      const response = await fetch(
-        "https://famdev.srvkoikarpfess.ddns.net/api/v1/commentaire",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            texte: nouveauCommentaire,
-            ressource_id: parseInt(resourceId), // Convertir en entier
-          }),
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/commentaire`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          texte: nouveauCommentaire,
+          ressource_id: parseInt(resourceId), // Convertir en entier
+        }),
+      });
 
       if (response.ok) {
         // Actualiser les commentaires après l'ajout d'un nouveau commentaire

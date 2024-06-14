@@ -11,6 +11,7 @@ export default function ProfilComponent() {
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState(null); // Ajout de l'état local userId
   const router = useRouter();
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   // Fonction pour formater la date au format "jour mois année"
   const formatDate = (dateString) => {
@@ -33,16 +34,13 @@ export default function ProfilComponent() {
         setUserId(userId); // Mettre à jour l'état local userId
 
         // Récupération des informations de l'utilisateur
-        const userResponse = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/v1/users?id=${userId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const userResponse = await fetch(`${API_ENDPOINT}/users?id=${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (userResponse.ok) {
           const userData = await userResponse.json();
@@ -50,7 +48,7 @@ export default function ProfilComponent() {
 
           // Récupération des ressources de l'utilisateur actuel
           const ressourcesResponse = await fetch(
-            `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources?id_utilisateur=${userId}`,
+            `${API_ENDPOINT}/ressources?id_utilisateur=${userId}`,
             {
               method: "GET",
               headers: {
@@ -111,7 +109,7 @@ export default function ProfilComponent() {
         ) : user ? (
           <>
             <img
-              src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${user.t_profil.profil_photo}`}
+              src={`${API_ENDPOINT}/images?image=${user.t_profil.profil_photo}`}
               className={style.avatar}
             />
             <p className={style.name}>

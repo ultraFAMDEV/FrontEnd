@@ -7,6 +7,7 @@ import NouveauCommentaireForm from "@/components/ressources/newCommentaireCompon
 import jwt from "jsonwebtoken";
 
 export default function Ressource() {
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "2-digit" };
     return new Date(dateString).toLocaleDateString("fr-FR", options);
@@ -36,15 +37,12 @@ export default function Ressource() {
   useEffect(() => {
     const fetchRessource = async () => {
       try {
-        const response = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources?id=${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${API_ENDPOINT}/ressources?id=${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setRessource(data);
@@ -75,7 +73,7 @@ export default function Ressource() {
     const fetchCommentaires = async () => {
       try {
         const response = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/v1/commentaire?ressource_id=${id}`,
+          `${API_ENDPOINT}/commentaire?ressource_id=${id}`,
           {
             method: "GET",
             headers: {
@@ -102,19 +100,16 @@ export default function Ressource() {
 
   const handleSubmit = async (nouveauCommentaireTexte) => {
     try {
-      const response = await fetch(
-        `https://famdev.srvkoikarpfess.ddns.net/api/v1/commentaire`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ressource_id: id,
-            commentaire_texte: nouveauCommentaireTexte,
-          }),
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/commentaire`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ressource_id: id,
+          commentaire_texte: nouveauCommentaireTexte,
+        }),
+      });
       if (response.ok) {
         // Après avoir ajouté un nouveau commentaire avec succès, mettre à jour la liste des commentaires
         const updatedCommentaires = await fetchUpdatedCommentaires();
@@ -130,7 +125,7 @@ export default function Ressource() {
   const fetchUpdatedCommentaires = async () => {
     try {
       const response = await fetch(
-        `https://famdev.srvkoikarpfess.ddns.net/api/v1/commentaire?ressource_id=${id}`,
+        `${API_ENDPOINT}/commentaire?ressource_id=${id}`,
         {
           method: "GET",
           headers: {
@@ -166,19 +161,16 @@ export default function Ressource() {
 
   const handleUpdateRessource = async () => {
     try {
-      const response = await fetch(
-        `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ressource_titre: editableTitle,
-            ressource_contenu: editableContent,
-          }),
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/ressources/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ressource_titre: editableTitle,
+          ressource_contenu: editableContent,
+        }),
+      });
       if (response.ok) {
         const updatedRessource = await response.json();
         setRessource(updatedRessource);
@@ -213,15 +205,12 @@ export default function Ressource() {
 
   const handleDeleteClick = async () => {
     try {
-      const response = await fetch(
-        `https://famdev.srvkoikarpfess.ddns.net/api/v1/ressources/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/ressources/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (response.ok) {
         // Rediriger vers la page d'accueil ou une autre page
         router.push("/");
@@ -255,7 +244,7 @@ export default function Ressource() {
           <ul>
             <div className={style.avatarName}>
               <img
-                src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.t_utilisateur.t_profil.profil_photo}`}
+                src={`${API_ENDPOINT}/images?image=${ressource.t_utilisateur.t_profil.profil_photo}`}
               />
               <li>
                 {ressource.t_utilisateur.utilisateur_prenom} <span> </span>
@@ -326,7 +315,7 @@ export default function Ressource() {
                 </h1>
                 <img
                   className={style.imgRessource}
-                  src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${ressource.ressource_media}`}
+                  src={`${API_ENDPOINT}/images?image=${ressource.ressource_media}`}
                   alt="Ressource Media"
                 />
                 <div className={style.ressource_contenu}>
@@ -353,7 +342,7 @@ export default function Ressource() {
                     <p>
                       <strong>
                         <img
-                          src={`https://famdev.srvkoikarpfess.ddns.net/api/v1/images?image=${commentaire.t_utilisateur.t_profil.profil_photo}`}
+                          src={`${API_ENDPOINT}/images?image=${commentaire.t_utilisateur.t_profil.profil_photo}`}
                           className={style.avatarCommentaire}
                         />
                         {commentaire.t_utilisateur.utilisateur_prenom}{" "}

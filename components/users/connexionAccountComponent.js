@@ -10,6 +10,7 @@ export default function ComponentConnexion() {
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -21,16 +22,13 @@ export default function ComponentConnexion() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(
-        "https://famdev.srvkoikarpfess.ddns.net/api/v1/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       const data = await response.json();
 
@@ -40,8 +38,10 @@ export default function ComponentConnexion() {
         localStorage.setItem("token", data.token);
         setToken(data.token);
 
-        document.cookie = 'userId='+ data.user +'; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-        document.cookie = 'token='+ data.token +'; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+        document.cookie =
+          "userId=" + data.user + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+        document.cookie =
+          "token=" + data.token + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
 
         router.push("/");
       } else {

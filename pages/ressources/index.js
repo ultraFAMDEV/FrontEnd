@@ -8,19 +8,17 @@ export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          "https://famdev.srvkoikarpfess.ddns.net/api/v1/categorie",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${API_ENDPOINT}/categorie`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -40,7 +38,7 @@ export default function Categories() {
     const searchRessources = async () => {
       try {
         const response = await fetch(
-          `https://famdev.srvkoikarpfess.ddns.net/api/v1/searchRessource?recherche=${searchValue}`,
+          `${API_ENDPOINT}/searchRessource?recherche=${searchValue}`,
           {
             method: "GET",
             headers: {
